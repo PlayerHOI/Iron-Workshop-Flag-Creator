@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainWindowElement" maxHeight="650.0" maxWidth="800.0" minHeight="650.0" minWidth="800.0" prefHeight="650.0" prefWidth="800.0" snapToPixel="false" styleClass="appBackgroundImage" stylesheets="file:/C:/Users/PlayerPC/Desktop/IW%20Flag%20Creator/src/style/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iw.flagCreator.MainController">
+   <children>
+      <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="800.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Label layoutX="37.0" layoutY="55.0" text="Step 1 : Select Files and Folders">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+         <padding>
+            <Insets left="5.0" top="-10.0" />
+         </padding>
+      </Label>
+      <HBox alignment="CENTER" layoutX="37.0" layoutY="72.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="725.0" styleClass="appSectionFrame" stylesheets="file:/C:/Users/PlayerPC/Desktop/IW%20Flag%20Creator/src/style/style.css">
+         <children>
+            <Label text="*Flag Path:">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="flagFilePathTextField" prefHeight="26.0" prefWidth="245.0" promptText="Paste path or click folder to choose a file" />
+            <ImageView fx:id="flagPathFolderIcon" fitHeight="20.0" fitWidth="27.0" onMouseClicked="#openFlagFolderLocator">
+               <image>
+                  <Image url="file:/C:/Users/PlayerPC/Desktop/IW%20Flag%20Creator/src/images/folder%20icon.png" />
+               </image>
+               <effect>
+                  <DropShadow height="10.0" radius="4.5" width="10.0" />
+               </effect>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Label text="*Ouput Folder:">
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="outputFolderTextField" prefHeight="26.0" prefWidth="245.0" promptText="Paste path or click folder to choose a folder" />
+            <ImageView fx:id="outputFolderPathIcon" fitHeight="20.0" fitWidth="27.0" onMouseClicked="#openOutputFolderLocator">
+               <image>
+                  <Image url="file:/C:/Users/PlayerPC/Desktop/IW%20Flag%20Creator/src/images/folder%20icon.png" />
+               </image>
+               <effect>
+                  <DropShadow height="10.0" radius="4.5" width="10.0" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+      <Label layoutX="38.0" layoutY="144.0" text="Step 2 : Flag File Settings">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+         <padding>
+            <Insets left="5.0" top="-10.0" />
+         </padding>
+      </Label>
+      <HBox alignment="CENTER" layoutX="38.0" layoutY="161.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="87.0" prefWidth="725.0" styleClass="appSectionFrame" stylesheets="@../../../../../style/style.css" AnchorPane.bottomAnchor="402.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="161.0">
+         <children>
+            <Label text="*Flag Name Prefix">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="flagTagTextField" prefHeight="37.0" prefWidth="150.0" promptText="Country TAG" />
+            <Label text="Flag Name Suffix">
+               <HBox.margin>
+                  <Insets left="100.0" right="5.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="flagSuffixTextField" prefHeight="37.0" prefWidth="150.0" promptText="Flag Ideology" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="10.0" />
+         </padding></HBox>
+      <Label layoutX="37.0" layoutY="266.0" text="Step 3 : Select Game">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+         <padding>
+            <Insets left="5.0" top="-10.0" />
+         </padding>
+      </Label>
+      <HBox fx:id="gameSelectionElement" alignment="CENTER" layoutX="37.0" layoutY="283.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="125.0" prefWidth="725.0" styleClass="appSectionFrame" stylesheets="file:/C:/Users/PlayerPC/Desktop/IW%20Flag%20Creator/src/style/style.css">
+         <children>
+            <ImageView fx:id="hoi4GameIcon" fitHeight="180.0" fitWidth="180.0" onMouseClicked="#createFlagHoi4" opacity="0.25" preserveRatio="true">
+               <image>
+                  <Image url="file:/C:/Users/PlayerPC/Desktop/IW%20Flag%20Creator/src/images/hoi4gameicon.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="hoi3GameIcon" fitHeight="150.0" fitWidth="130.0" onMouseClicked="#createFlagVic2" opacity="0.25" preserveRatio="true">
+               <image>
+                  <Image url="file:/C:/Users/PlayerPC/Desktop/IW%20Flag%20Creator/src/images/Hoi3andVic2.png" />
+               </image>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="20.0" />
+               </HBox.margin>
+               <effect>
+                  <DropShadow height="10.0" radius="4.5" width="10.0" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="eu4GameIcon" fitHeight="150.0" fitWidth="140.0" onMouseClicked="#createFlagEU4" opacity="0.25" preserveRatio="true">
+               <image>
+                  <Image url="file:/C:/Users/PlayerPC/Desktop/IW%20Flag%20Creator/src/images/eu4andCK2.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="20.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </HBox>
+      <Label layoutX="37.0" layoutY="440.0" text="Flag Preview">
+         <padding>
+            <Insets left="10.0" top="-10.0" />
+         </padding>
+      </Label>
+      <HBox fx:id="flagPreviewElement" alignment="CENTER" layoutX="38.0" layoutY="426.0" prefHeight="130.0" prefWidth="725.0" styleClass="appSectionFrame" stylesheets="@../../../../../style/style.css" />
+      <Button fx:id="createFlagButton" layoutX="129.0" layoutY="584.0" mnemonicParsing="false" onAction="#createFlagButtonClick" prefHeight="43.0" prefWidth="542.0" text="Create Flag">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <effect>
+            <DropShadow height="2.34" radius="0.08499999999999996" spread="0.29" width="0.0" />
+         </effect></Button>
+      <Label layoutX="38.0" layoutY="597.0" text="Version: 1.0" />
+      <Button fx:id="previewFlagButton" alignment="CENTER" disable="true" layoutX="660.0" layoutY="436.0" mnemonicParsing="false" onAction="#generateFlagPreview" prefHeight="111.0" prefWidth="94.0" text="Preview Flag" textAlignment="CENTER" wrapText="true" />
+   </children>
+</AnchorPane>

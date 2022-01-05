@@ -1,0 +1,8 @@
+.appSectionFrame {
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+}
+.appBackgroundImage {
+    -fx-background-image: url('background.jpg');
+    -fx-background-size: 100% 100%;
+}
