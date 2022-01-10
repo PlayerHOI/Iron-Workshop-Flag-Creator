@@ -1,11 +1,14 @@
 package flag_templates;
 
+import com.iw.flagCreator.MainController;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class hoi4FlagSpecs extends GenericFlagTemplate
 {
@@ -17,6 +20,7 @@ public class hoi4FlagSpecs extends GenericFlagTemplate
     private final int mediumFlagHeight = 26;
     private final int smallFlagWidth = 10;
     private final int smallFlagHeight = 7;
+    private String sourceFileLocationPath;
 
     public hoi4FlagSpecs(File sourceFlagLocation, String sourceFileLocationPath, File outputFolderLocation,String outputFileFolderPath,String name,String suffix)
     {
@@ -38,15 +42,15 @@ public class hoi4FlagSpecs extends GenericFlagTemplate
     {
         try {
             /// Creating Large Flag
-            BufferedImage largeFlag = ImageIO.read(super.getSourceFlagLocation());
+            BufferedImage largeFlag = ImageIO.read(getSourceFlagLocation());
             largeFlag = resizeImage(largeFlag,baseFlagWidth,baseFlagHeight);
             convertToTGA(createFlipped(largeFlag),new File(outputFileFolderPath + "\\" + super.getFlagName() + super.getFlagNameSuffix() + ".tga"));
             /// Creating Medium Flag
-            BufferedImage mediumFlag = ImageIO.read(super.getSourceFlagLocation());
+            BufferedImage mediumFlag = ImageIO.read(getSourceFlagLocation());
             mediumFlag = resizeImage(mediumFlag,mediumFlagWidth,mediumFlagHeight);
             convertToTGA(createFlipped(mediumFlag),new File(outputFileFolderPath + "\\medium\\" + super.getFlagName() + super.getFlagNameSuffix() + ".tga"));
             /// Creating Small Flag
-            BufferedImage smallFlag = ImageIO.read(super.getSourceFlagLocation());
+            BufferedImage smallFlag = ImageIO.read(getSourceFlagLocation());
             smallFlag = resizeImage(mediumFlag,smallFlagWidth,smallFlagHeight);
             convertToTGA(createFlipped(smallFlag),new File(outputFileFolderPath + "\\small\\" + super.getFlagName() + super.getFlagNameSuffix() + ".tga"));
 

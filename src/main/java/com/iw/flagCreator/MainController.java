@@ -1,13 +1,16 @@
 package com.iw.flagCreator;
 
 import com.twelvemonkeys.image.ResampleOp;
+import flag_templates.EU3FlagSpecs;
 import flag_templates.EU4FlagSpecs;
 import flag_templates.GenericFlagTemplate;
 import flag_templates.hoi4FlagSpecs;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
@@ -16,8 +19,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.io.File;
@@ -25,17 +28,24 @@ import java.net.URL;
 
 public class MainController
 {
+
+    @FXML
+    protected ImageView patreonIcon;
+
     @FXML
     protected AnchorPane mainWindowElement;
 
     @FXML
-    protected ImageView hoi4GameIcon;
+    protected Button hoi4GameIcon;
 
     @FXML
-    protected ImageView hoi3GameIcon;
+    protected Button hoi3GameIcon;
 
     @FXML
-    protected ImageView eu4GameIcon;
+    protected Button eu4GameIcon;
+
+    @FXML
+    protected Button eu3GameIcon;
 
     @FXML
     protected ImageView flagPathFolderIcon;
@@ -56,6 +66,9 @@ public class MainController
     protected TextField flagSuffixTextField;
 
     @FXML
+    public Label notificationsLabel;
+
+    @FXML
     protected HBox flagPreviewElement;
 
     @FXML
@@ -67,77 +80,169 @@ public class MainController
     @FXML
     protected Button previewFlagButton;
 
-    File imageToConvert = new File("C:\\Users\\PlayerPC\\Desktop\\IW Flag Creator\\hoi4FlagTemplate.tga");
+    @FXML
+    protected Label flagCreatorVersionLabel;
+
+    String dummyFlagFilePath = "flagTemplateFile.png";
+    File imageToConvert = new File(dummyFlagFilePath);
     File outputImage = new File("");
     GenericFlagTemplate newFlagSpecs = null;
+    String flagCreatorVersion = "1.0";
 
     @FXML
     public void initialize(){
+        flagCreatorVersionLabel.setText("Version: " + flagCreatorVersion);
+        openAboutPopup();
         /// Listener to flag source text field to prevent generating preview when no file is loaded
         flagFilePathTextField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            if (!(newValue.isEmpty())) {
+            // Disable Preview Button if no flag is loaded
+            if (!(newValue.isEmpty()) && flagPathIsProperFile(flagFilePathTextField.getText())) {
                 imageToConvert = new File(flagFilePathTextField.getText());
                 previewFlagButton.setDisable(false);
             }
-            if (newValue.isEmpty()) {
+            if (newValue.isEmpty() || (!flagPathIsProperFile(flagFilePathTextField.getText()))) {
                 imageToConvert = new File("");
                 previewFlagButton.setDisable(true);
+            }
+            // Disable Create Button if no flag is loaded
+            if (!(newValue.isEmpty()) && flagPathIsProperFile(flagFilePathTextField.getText())) {
+                createFlagButton.setDisable(false);
+            }
+            if (newValue.isEmpty() || (!flagPathIsProperFile(flagFilePathTextField.getText()))) {
+                createFlagButton.setDisable(true);
             }
         });
     }
 
     @FXML
+    public void openPatreonPage(){
+        try {
+            Desktop.getDesktop().browse(new URL("https://www.patreon.com/playerhoi").toURI());
+        } catch (Exception e) {}
+    }
+
+    @FXML
+    public void openGitHubPage(){
+        try {
+            Desktop.getDesktop().browse(new URL("https://github.com/PlayerHOI/IWFC").toURI());
+        } catch (Exception e) {}
+    }
+
+    @FXML
+    public void openDiscordPage(){
+        try {
+            Desktop.getDesktop().browse(new URL("https://discord.gg/sSCU3WS").toURI());
+        } catch (Exception e) {}
+    }
+
+    public void openKnownIssuesPage(){
+        try {
+            Desktop.getDesktop().browse(new URL("https://github.com/PlayerHOI/IWFC/issues/1").toURI());
+        } catch (Exception e) {}
+    }
+
+    public void openFlagCreatorReleasesPage(){
+        try {
+            Desktop.getDesktop().browse(new URL("https://github.com/PlayerHOI/IWFC/releases").toURI());
+        } catch (Exception e) {}
+    }
+
+    @FXML
+    public void openAboutPopup(){
+        Alert aboutPopup = new Alert(Alert.AlertType.INFORMATION);
+        aboutPopup.setTitle("Iron Workshop Flag Creator " + flagCreatorVersion);
+        aboutPopup.setHeaderText("Created by PlayerHOI\nA product of the Iron Workshop\nironworkshopbiz@gmail.com\n");
+        aboutPopup.setContentText("Use this software at your own discretion, any consequence of using this software" +
+                " is the sole responsibility of the user.\n\nClick on 'Help' -> 'How to use' section for instructions on how " +
+                "to use the flag creator.\n\nAccepted file formats: JPEG, JPG, TGA, PNG and BMP.");
+        aboutPopup.setWidth(200);
+        aboutPopup.setHeight(500);
+        aboutPopup.showAndWait();
+    }
+
+    /// Methods to create instances of flags
+    @FXML
     public void createFlagHoi4(){
         gameIconClickEffect();
-        hoi4GameIcon.setOpacity(100);
-        newFlagSpecs = new hoi4FlagSpecs(imageToConvert,flagFilePathTextField.getText(),outputImage,outputFolderTextField.getText(),flagTagTextField.getText(),flagSuffixTextField.getText());
+        hoi4GameIcon.getStyleClass().add("gameIconClickedClass");
+        newFlagSpecs = new hoi4FlagSpecs(imageToConvert,flagFilePathTextField.getText(),
+                outputImage,outputFolderTextField.getText(),flagTagTextField.getText(),flagSuffixTextField.getText());
     }
 
     @FXML
     public void createFlagVic2(){
         gameIconClickEffect();
-        hoi3GameIcon.setOpacity(100);
-        newFlagSpecs = new GenericFlagTemplate(imageToConvert,flagFilePathTextField.getText(),outputImage,outputFolderTextField.getText(),flagTagTextField.getText(),flagSuffixTextField.getText());
+        hoi3GameIcon.getStyleClass().add("gameIconClickedClass");
+        newFlagSpecs = new GenericFlagTemplate(imageToConvert,flagFilePathTextField.getText()
+                ,outputImage,outputFolderTextField.getText(),flagTagTextField.getText(),flagSuffixTextField.getText());
     }
 
     @FXML
     public void createFlagEU4(){
         gameIconClickEffect();
-        eu4GameIcon.setOpacity(100);
-        newFlagSpecs = new EU4FlagSpecs(imageToConvert,flagFilePathTextField.getText(),outputImage,outputFolderTextField.getText(),flagTagTextField.getText(),flagSuffixTextField.getText());
+        eu4GameIcon.getStyleClass().add("gameIconClickedClass");
+        newFlagSpecs = new EU4FlagSpecs(imageToConvert,flagFilePathTextField.getText()
+                ,outputImage,outputFolderTextField.getText(),flagTagTextField.getText(),flagSuffixTextField.getText());
     }
 
+    @FXML
+    public void createFlagEU3(){
+        gameIconClickEffect();
+        eu3GameIcon.getStyleClass().add("gameIconClickedClass");
+        newFlagSpecs = new EU3FlagSpecs(imageToConvert,flagFilePathTextField.getText()
+                ,outputImage,outputFolderTextField.getText(),flagTagTextField.getText(),flagSuffixTextField.getText());
+    }
+
+    @FXML
+    public void gameIconHoverEffectHOI4(){
+        hoi4GameIcon.getStyleClass().add("gameIconHoverClass");
+    }
+
+    @FXML
+    public void gameIconHoverEffectHOI3(){
+        hoi3GameIcon.getStyleClass().add("gameIconHoverClass");
+    }
+
+    @FXML
+    public void gameIconHoverEffectEU3(){
+        eu3GameIcon.getStyleClass().add("gameIconHoverClass");
+    }
+
+    @FXML
+    public void gameIconHoverEffectEU4(){
+        eu4GameIcon.getStyleClass().add("gameIconHoverClass");
+    }
+
+    @FXML
+    public void gameIconRemoveHoverEffectHOI4(){
+        hoi4GameIcon.getStyleClass().remove("gameIconHoverClass");
+    }
+
+    @FXML
+    public void gameIconRemoveHoverEffectHOI3(){
+        hoi3GameIcon.getStyleClass().remove("gameIconHoverClass");
+    }
+
+    @FXML
+    public void gameIconRemoveHoverEffectEU3(){
+        eu3GameIcon.getStyleClass().remove("gameIconHoverClass");
+    }
+
+    @FXML
+    public void gameIconRemoveHoverEffectEU4(){
+        eu4GameIcon.getStyleClass().remove("gameIconHoverClass");
+    }
 
     public void gameIconClickEffect(){
         for (Node child : gameSelectionElement.getChildren())
         {
-            child.setOpacity(0.25);
+            child.getStyleClass().remove("gameIconClickedClass");
         }
     }
 
-    @FXML
-    public void createFlagButtonClick(){
-        newFlagSpecs.createFlagFolders();
-        newFlagSpecs.createFlag();
-        gameIconClickEffect();
-    }
-
-    public void generateFlagPreview(){
-        if(newFlagSpecs.getBaseFlagWidth()==82){
-            generateThreeFlagPreview();
-        }else {
-            generateSingleFlagPreview();
-            gameIconClickEffect();
-        }
-    }
-
-    /// Generates a 3 flag preview for HOI4 flags
-    public void generateThreeFlagPreview(){
-        /// Removes all flags from Node to prevent buildup of too many flags
-        flagPreviewElement.getChildren().removeAll(flagPreviewElement.getChildren());
-        /// Resets imageToConvert to prevent conflict and writes flag from URL
+    public void checkIfFlagObjectExists(){
         if(flagFilePathTextField.getText().startsWith("https://")){
-            imageToConvert = new File("C:\\Users\\PlayerPC\\Desktop\\IW Flag Creator\\hoi4FlagTemplate.tga");
+            imageToConvert = new File(dummyFlagFilePath);
             try {
                 URL flagURL = new URL(flagFilePathTextField.getText());
                 BufferedImage img = ImageIO.read(flagURL);
@@ -147,6 +252,75 @@ public class MainController
                 e.printStackTrace();
             }
         }
+    }
+
+    @FXML
+    public void createFlagButtonClick(){
+        checkIfNotificationNeeded();
+        gameIconClickEffect();
+        newFlagSpecs.createFlagFolders();
+        checkIfFlagObjectExists();
+        try
+        {
+            newFlagSpecs.setFlagName(flagTagTextField.getText());
+            newFlagSpecs.createFlag();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void checkIfNotificationNeeded(){
+        if(outputFolderTextField.getText().isEmpty()){
+            createWarningPopup("No output folder set", "Make sure an output folder has been selected");
+        }
+        if(newFlagSpecs==null){
+            createWarningPopup("No Game Selected", "Click on a game icon before creating the flag");
+        }
+        if(newFlagSpecs instanceof hoi4FlagSpecs && !(outputFolderTextField.getText().isEmpty())){
+            createWarningPopup("Important", "Hearts of Iron 4 flags files " +
+                    "are created upside down due " +
+                    "to an ongoing issue, the flags will appear properly in-game.");
+        }
+    }
+
+    public void createWarningPopup(String alertTitle ,String alertText){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(alertTitle);
+        alert.setHeaderText(null);
+        alert.setContentText(alertText);
+        alert.showAndWait();
+    }
+
+    public void generateFlagPreview(){
+        if(newFlagSpecs==null){
+            createWarningPopup("No Game Selected", "No game selected, click on a game icon before " +
+                    "generating a preview.");
+        }
+        if(newFlagSpecs instanceof hoi4FlagSpecs){
+            generateThreeFlagPreview();
+        }else {
+            generateSingleFlagPreview();
+            gameIconClickEffect();
+        }
+    }
+
+    public boolean flagPathIsProperFile(String flagPath){
+        if(flagPath.endsWith("jpg") || flagPath.endsWith("jpeg")
+                || flagPath.endsWith("png") || flagPath.endsWith("bmp")
+                || flagPath.endsWith("tga"))  {
+            return true;
+        }
+        return false;
+    }
+
+    /// Generates a 3 flag preview for HOI4 flags
+    public void generateThreeFlagPreview(){
+        /// Removes all flags from Node to prevent buildup of too many flags
+        flagPreviewElement.getChildren().removeAll(flagPreviewElement.getChildren());
+        /// Resets imageToConvert to prevent conflict and writes flag from URL
+        checkIfFlagObjectExists();
         try {
             flagPreviewElement.setSpacing(20);
             // First Flag
@@ -171,20 +345,8 @@ public class MainController
     public void generateSingleFlagPreview(){
         /// Removes all flags from Node to prevent buildup of too many flags
         flagPreviewElement.getChildren().removeAll(flagPreviewElement.getChildren());
-        /// Removes all flags from Node to prevent buildup of too many flags
-        flagPreviewElement.getChildren().removeAll(flagPreviewElement.getChildren());
         /// Resets imageToConvert to prevent conflict and writes flag from URL
-        if(flagFilePathTextField.getText().startsWith("https://")){
-            imageToConvert = new File("C:\\Users\\PlayerPC\\Desktop\\IW Flag Creator\\hoi4FlagTemplate.tga");
-            try {
-                URL flagURL = new URL(flagFilePathTextField.getText());
-                BufferedImage img = ImageIO.read(flagURL);
-                ImageIO.write(img, "png", imageToConvert);
-            } catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
+        checkIfFlagObjectExists();
         try {
             BufferedImage flagPreviewLarge = ImageIO.read(imageToConvert);
             flagPreviewLarge = resizeImage(flagPreviewLarge,newFlagSpecs.getBaseFlagWidth(),newFlagSpecs.getBaseFlagHeight());

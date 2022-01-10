@@ -1,0 +1,44 @@
+.appSectionFrame {
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+}
+.appBackgroundImage {
+    -fx-background-image: url('background.jpg');
+    -fx-background-size: 100% 100%;
+}
+
+#hoi4GameButton {
+    -fx-background-image: url('../hoi4gameicon.png');
+    -fx-background-size: 180 180; 
+}
+
+#vic2hoi3Button {
+    -fx-background-image: url('../Hoi3andVic2.png');  
+    -fx-background-size: 130 130;  
+}
+
+#eu4ck2Button {
+    -fx-background-image: url('../eu4andCK2.png');  
+    -fx-background-size: 130 130;      
+}
+
+#eu3Button {
+    -fx-background-image: url('../eu3GameIcon.png');  
+    -fx-background-size: 130 130;   
+}
+
+.gameIconClass {
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:center;
+    -fx-cursor:hand;
+    -fx-opacity: 0.50;
+    -fx-background-radius: 10px;
+}
+.gameIconHoverClass{
+    -fx-opacity: 0.75;
+}
+.gameIconClickedClass{
+    -fx-opacity: 1.0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}

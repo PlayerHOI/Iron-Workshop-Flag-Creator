@@ -42,14 +42,14 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../javafx-sdk-17.0.1/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.32217574" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
-  <component name="RunManager" selected="Application.MyLauncher">
+  <component name="RunManager" selected="Application.StartFlagCreator">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="jbr-11" />
       <option name="MAIN_CLASS_NAME" value="com.iw.flagCreator.Main" />
@@ -64,8 +64,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.iw.flagCreator.MyLauncher" />
+    <configuration name="StartFlagCreator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.iw.flagCreator.StartFlagCreator" />
       <module name="iw_flag_creator" />
       <extension name="coverage">
         <pattern>
@@ -79,7 +79,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MyLauncher" />
+        <item itemvalue="Application.StartFlagCreator" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -98,10 +98,18 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/flag_templates/GenericFlagTemplate.java</url>
-          <line>33</line>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iw/flagCreator/MainController.java</url>
+          <line>226</line>
+          <properties class="com.iw.flagCreator.MainController" method="gameIconRemoveHoverEffectEU3">
+            <option name="EMULATED" value="true" />
+          </properties>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/flag_templates/EU3FlagSpecs.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

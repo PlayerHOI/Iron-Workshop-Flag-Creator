@@ -15,7 +15,7 @@ public class GenericFlagTemplate
     private final File sourceFlagLocation;
     private File outputFolderLocation;
     private String outputFileFolderPath;
-    private final String flagName;
+    private String flagName;
     private final String flagNameSuffix;
     private final int baseFlagWidth = 93;
     private final int baseFlagHeight = 64;
@@ -73,7 +73,7 @@ public class GenericFlagTemplate
     public void createFlagFolders(){
         createRequiredFolders(outputFileFolderPath, "flags");
         outputFileFolderPath = outputFileFolderPath + "//" + "flags";
-        outputFolderLocation = new File(outputFileFolderPath + "\\" + flagName + flagNameSuffix + ".tga");
+        outputFolderLocation = new File(outputFileFolderPath + "\\" + this.flagName + this.flagNameSuffix + ".tga");
         System.out.println(outputFileFolderPath);
     }
     protected void createRequiredFolders(String folderPath, String folderName)
@@ -83,21 +83,20 @@ public class GenericFlagTemplate
         System.out.println(folderPath+folderName);
         newFolderCreator.mkdir();
     }
+
+    public void setFlagName(String name){
+        flagName = name;
+    }
+
     /////////////////////////////////////////
     ////////// FLAG CREATING LOGIC //////////
     /////////////////////////////////////////
 
-    public void createFlag()
+    public void createFlag() throws IOException
     {
-        try {
-            BufferedImage image = ImageIO.read(sourceFlagLocation);
-            image = resizeImage(image,this.getBaseFlagWidth(),this.getBaseFlagHeight());
-            convertToTGA(image,outputFolderLocation);
-
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        BufferedImage image = ImageIO.read(sourceFlagLocation);
+        image = resizeImage(image,this.getBaseFlagWidth(),this.getBaseFlagHeight());
+        convertToTGA(image,outputFolderLocation);
     }
     public BufferedImage resizeImage(BufferedImage imageToResize, int width, int height)
     {
