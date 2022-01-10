@@ -154,7 +154,7 @@ public class MainController
         aboutPopup.setHeaderText("Created by PlayerHOI\nA product of the Iron Workshop\nironworkshopbiz@gmail.com\n");
         aboutPopup.setContentText("Use this software at your own discretion, any consequence of using this software" +
                 " is the sole responsibility of the user.\n\nClick on 'Help' -> 'How to use' section for instructions on how " +
-                "to use the flag creator.\n\nAccepted file formats: JPEG, JPG, TGA, PNG and BMP.");
+                "to use the flag creator.\n\nSupported file formats: JPEG, JPG, TGA, PNG and BMP.");
         aboutPopup.setWidth(200);
         aboutPopup.setHeight(500);
         aboutPopup.showAndWait();
@@ -309,8 +309,18 @@ public class MainController
     public boolean flagPathIsProperFile(String flagPath){
         if(flagPath.endsWith("jpg") || flagPath.endsWith("jpeg")
                 || flagPath.endsWith("png") || flagPath.endsWith("bmp")
-                || flagPath.endsWith("tga"))  {
+                || flagPath.endsWith("tga")) {
             return true;
+        }
+        if(flagPath.endsWith("svg") && flagPath.contains("wikipedia.org")){
+                Alert fileNotSupportedPopup = new Alert(Alert.AlertType.ERROR);
+            fileNotSupportedPopup.setTitle("File type not supported");
+            fileNotSupportedPopup.setHeaderText("SVG files are not supported and cannot be used");
+            fileNotSupportedPopup.setContentText("It looks like you are trying to use a flag file from Wikipedia.\n" +
+                    "see 'Help' -> 'How to use' " +
+                    "on how to retrieve flags from Wikipedia.");
+            fileNotSupportedPopup.showAndWait();
+            flagFilePathTextField.clear();
         }
         return false;
     }
