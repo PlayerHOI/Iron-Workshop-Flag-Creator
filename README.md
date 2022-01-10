@@ -4,17 +4,16 @@ The Iron Workshop Flag Creator (IWFC) has been created to ease the process of cr
 Flags are created in correspondence to the requirments of the game they are meant to be used in as well as any required folders.  
 ### Supported Games
 - Hearts of Iron IV
-Hearts of Iron III
-Victoria 2
-Europa Universalis III
-Europa Universalis IV
-March of The Eagles.
-*
+- Hearts of Iron III
+- Victoria 2
+- Europa Universalis III
+- Europa Universalis IV
+- March of The Eagles.
 ### Supported File Formats
-*JPEG
-*JPG
-*TGA
-*PNG
-*BMP
+- JPEG
+- JPG
+- TGA
+- PNG
+- BMP
 ## Credits
 Image conversion and positioning executed by TwelveMonkeys ImageIO API: https://github.com/haraldk/TwelveMonkeys
