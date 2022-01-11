@@ -1,30 +1,26 @@
 package flag_templates;
 
-import com.iw.flagCreator.MainController;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 public class hoi4FlagSpecs extends GenericFlagTemplate
 {
     private String outputFileFolderPath = getOutputFileFolderPath();
     private final File outputFolderLocation = getOutputFolderLocation();
-    private final int baseFlagWidth = 82;
-    private final int baseFlagHeight = 52;
-    private final int mediumFlagWidth = 41;
-    private final int mediumFlagHeight = 26;
-    private final int smallFlagWidth = 10;
-    private final int smallFlagHeight = 7;
-    private String sourceFileLocationPath;
+    final int baseFlagWidth = 82;
+    final int baseFlagHeight = 52;
+    final int mediumFlagWidth = 41;
+    final int mediumFlagHeight = 26;
+    final int smallFlagWidth = 10;
+    final int smallFlagHeight = 7;
 
-    public hoi4FlagSpecs(File sourceFlagLocation, String sourceFileLocationPath, File outputFolderLocation,String outputFileFolderPath,String name,String suffix)
+    public hoi4FlagSpecs(File sourceFlagLocation, File outputFolderLocation,String outputFileFolderPath,String name,String suffix)
     {
-        super(sourceFlagLocation,sourceFileLocationPath,outputFolderLocation,outputFileFolderPath,name,suffix);
+        super(sourceFlagLocation,outputFolderLocation,outputFileFolderPath,name,suffix);
     }
 
     @Override
@@ -76,38 +72,5 @@ public class hoi4FlagSpecs extends GenericFlagTemplate
         g.drawImage(image, 0, 0, null);
         g.dispose();
         return newImage;
-    }
-
-//    public void copyFiles() throws IOException
-//    {
-//        InputStream is = null;
-//        OutputStream os = null;
-//        try {
-//            is = new FileInputStream(this.getSourceFileLocationPath());
-//            os = new FileOutputStream(outputFileFolderPath + "\\medium\\" + super.getFlagName() + super.getFlagNameSuffix() + ".tga");
-//            byte[] buffer = new byte[1024];
-//            int length;
-//            while ((length = is.read(buffer)) > 0) {
-//                os.write(buffer, 0, length);
-//            }
-//        } catch (IOException e)
-//        {
-//            e.printStackTrace();
-//        } finally {
-//            is.close();
-//            os.close();
-//        }
-//    }
-
-    @Override
-    public int getBaseFlagWidth()
-    {
-        return this.baseFlagWidth;
-    }
-
-    @Override
-    public int getBaseFlagHeight()
-    {
-        return this.baseFlagHeight;
     }
 }

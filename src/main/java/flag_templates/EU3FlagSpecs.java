@@ -4,12 +4,12 @@ import java.io.File;
 public class EU3FlagSpecs extends GenericFlagTemplate
 {
 
-    private final int baseFlagWidth = 64;
-    private final int baseFlagHeight = 64;
+    final int baseFlagWidth = 64;
+    final int baseFlagHeight = 64;
 
-    public EU3FlagSpecs(File sourceFlagLocation, String sourceFileLocationPath, File outputFolderLocation, String outputFileFolderPath, String name, String suffix)
+    public EU3FlagSpecs(File sourceFlagFile, File outputFile, String outputFilePathString, String name, String suffix)
     {
-        super(sourceFlagLocation,sourceFileLocationPath,outputFolderLocation,outputFileFolderPath,name,suffix);
+        super(sourceFlagFile, outputFile, outputFilePathString, name, suffix);
     }
 
     @Override

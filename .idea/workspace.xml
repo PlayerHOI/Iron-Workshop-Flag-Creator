@@ -12,10 +12,12 @@
     <list default="true" id="a0dcb7c8-b6cc-4584-bf04-cc368177fb3b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flagTemplateFile.png" beforeDir="false" afterPath="$PROJECT_DIR$/flagTemplateFile.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iw_flag_creator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/iw_flag_creator.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/iw/flagCreator/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iw/flagCreator/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/flag_templates/EU3FlagSpecs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flag_templates/EU3FlagSpecs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/flag_templates/EU4FlagSpecs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flag_templates/EU4FlagSpecs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/flag_templates/GenericFlagTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flag_templates/GenericFlagTemplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/flag_templates/hoi4FlagSpecs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flag_templates/hoi4FlagSpecs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/iw/flagCreator/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/iw/flagCreator/MainController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/dummy.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +59,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.32217574" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="RunManager" selected="Application.StartFlagCreator">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -115,11 +117,6 @@
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/flag_templates/EU3FlagSpecs.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

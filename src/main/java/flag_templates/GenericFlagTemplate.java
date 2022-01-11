@@ -11,33 +11,26 @@ import java.io.IOException;
 
 public class GenericFlagTemplate
 {
-    private final String sourceFileLocationPath;
-    private final File sourceFlagLocation;
-    private File outputFolderLocation;
-    private String outputFileFolderPath;
-    private String flagName;
-    private final String flagNameSuffix;
+    private static File sourceFlagLocation;
+    private static File outputFolderLocation;
+    private static String outputFileFolderPath;
+    private static String flagName;
+    private static String flagNameSuffix;
     private final int baseFlagWidth = 93;
     private final int baseFlagHeight = 64;
 
-    public GenericFlagTemplate(File sourceFlagLocation, String sourceFileLocationPath, File outputFile,String outputFileFolderPath,String name,String suffix)
+    public GenericFlagTemplate(File sourceFlagFile, File outputFile,String outputFilePathString,String name,String suffix)
     {
-        this.sourceFileLocationPath = sourceFileLocationPath;
-        this.sourceFlagLocation = sourceFlagLocation;
-        this.outputFolderLocation = outputFile;
-        this.outputFileFolderPath = outputFileFolderPath;
-        this.flagName = name;
-        this.flagNameSuffix = suffix;
+        sourceFlagLocation = sourceFlagFile;
+        outputFolderLocation = outputFile;
+        outputFileFolderPath = outputFilePathString;
+        flagName = name;
+        flagNameSuffix = suffix;
     }
 
     public File getSourceFlagLocation()
     {
         return sourceFlagLocation;
-    }
-
-    public String getSourceFileLocationPath()
-    {
-        return sourceFileLocationPath;
     }
 
     public File getOutputFolderLocation()
@@ -73,7 +66,7 @@ public class GenericFlagTemplate
     public void createFlagFolders(){
         createRequiredFolders(outputFileFolderPath, "flags");
         outputFileFolderPath = outputFileFolderPath + "//" + "flags";
-        outputFolderLocation = new File(outputFileFolderPath + "\\" + this.flagName + this.flagNameSuffix + ".tga");
+        outputFolderLocation = new File(outputFileFolderPath + "\\" + flagName + flagNameSuffix + ".tga");
         System.out.println(outputFileFolderPath);
     }
     protected void createRequiredFolders(String folderPath, String folderName)
@@ -88,9 +81,9 @@ public class GenericFlagTemplate
         flagName = name;
     }
 
-    /////////////////////////////////////////
-    ////////// FLAG CREATING LOGIC //////////
-    /////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
+    ////////// FLAG CREATING LOGIC | SHOULD GO INTO ITS OWN CLASS LATER //////////////
+    //////////////////////////////////////////////////////////////////////////////////
 
     public void createFlag() throws IOException
     {
@@ -134,4 +127,25 @@ public class GenericFlagTemplate
         }
         return copy;
     }
+//    Unused, may come to use later
+//    public void copyFiles() throws IOException
+//    {
+//        InputStream is = null;
+//        OutputStream os = null;
+//        try {
+//            is = new FileInputStream(this.getSourceFileLocationPath());
+//            os = new FileOutputStream(outputFileFolderPath + "\\medium\\" + super.getFlagName() + super.getFlagNameSuffix() + ".tga");
+//            byte[] buffer = new byte[1024];
+//            int length;
+//            while ((length = is.read(buffer)) > 0) {
+//                os.write(buffer, 0, length);
+//            }
+//        } catch (IOException e)
+//        {
+//            e.printStackTrace();
+//        } finally {
+//            is.close();
+//            os.close();
+//        }
+//    }
 }

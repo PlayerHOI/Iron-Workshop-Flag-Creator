@@ -87,7 +87,7 @@ public class MainController
     File imageToConvert = new File(dummyFlagFilePath);
     File outputImage = new File("");
     GenericFlagTemplate newFlagSpecs = null;
-    String flagCreatorVersion = "1.0";
+    final String flagCreatorVersion = "1.0";
 
     @FXML
     public void initialize(){
@@ -165,7 +165,7 @@ public class MainController
     public void createFlagHoi4(){
         gameIconClickEffect();
         hoi4GameIcon.getStyleClass().add("gameIconClickedClass");
-        newFlagSpecs = new hoi4FlagSpecs(imageToConvert,flagFilePathTextField.getText(),
+        newFlagSpecs = new hoi4FlagSpecs(imageToConvert,
                 outputImage,outputFolderTextField.getText(),flagTagTextField.getText(),flagSuffixTextField.getText());
     }
 
@@ -173,24 +173,24 @@ public class MainController
     public void createFlagVic2(){
         gameIconClickEffect();
         hoi3GameIcon.getStyleClass().add("gameIconClickedClass");
-        newFlagSpecs = new GenericFlagTemplate(imageToConvert,flagFilePathTextField.getText()
-                ,outputImage,outputFolderTextField.getText(),flagTagTextField.getText(),flagSuffixTextField.getText());
+        newFlagSpecs = new GenericFlagTemplate(imageToConvert,outputImage,outputFolderTextField.getText(),
+                flagTagTextField.getText(),flagSuffixTextField.getText());
     }
 
     @FXML
     public void createFlagEU4(){
         gameIconClickEffect();
         eu4GameIcon.getStyleClass().add("gameIconClickedClass");
-        newFlagSpecs = new EU4FlagSpecs(imageToConvert,flagFilePathTextField.getText()
-                ,outputImage,outputFolderTextField.getText(),flagTagTextField.getText(),flagSuffixTextField.getText());
+        newFlagSpecs = new EU4FlagSpecs(imageToConvert,outputImage,outputFolderTextField.getText(),
+                flagTagTextField.getText(),flagSuffixTextField.getText());
     }
 
     @FXML
     public void createFlagEU3(){
         gameIconClickEffect();
         eu3GameIcon.getStyleClass().add("gameIconClickedClass");
-        newFlagSpecs = new EU3FlagSpecs(imageToConvert,flagFilePathTextField.getText()
-                ,outputImage,outputFolderTextField.getText(),flagTagTextField.getText(),flagSuffixTextField.getText());
+        newFlagSpecs = new EU3FlagSpecs(imageToConvert,outputImage,outputFolderTextField.getText()
+                ,flagTagTextField.getText(),flagSuffixTextField.getText());
     }
 
     @FXML
