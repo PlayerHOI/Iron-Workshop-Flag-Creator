@@ -2,7 +2,7 @@
 ## Flag Creator Purpose and Use
 The Iron Workshop Flag Creator (IWFC) has been created to ease the process of creating flags for [Paradox Interactive](https://www.paradoxinteractive.com/) games. Flags are created in correspondence to the requirments of the game they are meant to be used in as well as any required folders.  
 ### Supported Operating Systems
-Currently, the Flag Converter only works on Windows OS.
+Currently, the Flag Converter only works on **Windows OS**.
 ### Supported Games
 - Hearts of Iron III
 - Hearts of Iron IV
