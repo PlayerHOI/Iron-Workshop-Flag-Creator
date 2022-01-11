@@ -89,59 +89,82 @@ public class MainController
         /// Listener to flag source text field to prevent generating preview when no file is loaded
         flagFilePathTextField.textProperty().addListener((ObservableValue<? extends String> observable,
                                                           String oldValue, String newValue) -> {
-            // Disable Preview Button if no flag is loaded
-            if (!(newValue.isEmpty()) && flagPathIsProperFile(flagFilePathTextField.getText())) {
-                imageToConvert = new File(flagFilePathTextField.getText());
+            // Enable preview & create button if a flag file is loaded
+            if (!(newValue.isEmpty()) && flagPathIsProperFile(newValue)) {
                 previewFlagButton.setDisable(false);
             }
-            if (newValue.isEmpty() || (!flagPathIsProperFile(flagFilePathTextField.getText()))) {
-                imageToConvert = new File("");
+            // Disable preview & create button if no flag is loaded
+            if (newValue.isEmpty() || (!flagPathIsProperFile(newValue))) {
                 previewFlagButton.setDisable(true);
             }
-            // Disable Create Button if no flag is loaded
-            if (!(newValue.isEmpty()) && flagPathIsProperFile(flagFilePathTextField.getText())) {
+            /// Downloads an image from the web and creates a preview file in the source folder
+            if(newValue.startsWith("https://") && flagPathIsProperFile(flagFilePathTextField.getText())) {
+                try {
+                    URL flagURL = new URL(flagFilePathTextField.getText());
+                    BufferedImage img = ImageIO.read(flagURL);
+                    ImageIO.write(img, "PNG", imageToConvert = new File("flagFilePreview.png"));
+                } catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+        /// Listener to output folder text field to unlock create flag button
+        outputFolderTextField.textProperty().addListener((ObservableValue<? extends String> observable,
+                                                          String oldValue, String newValue) -> {
+            // Enable preview & create button if a flag file is loaded
+            if (!(newValue.isEmpty())) {
                 createFlagButton.setDisable(false);
             }
-            if (newValue.isEmpty() || (!flagPathIsProperFile(flagFilePathTextField.getText()))) {
+            // Disable preview & create button if no flag is loaded
+            if (newValue.isEmpty()) {
                 createFlagButton.setDisable(true);
-            }
-            if(newValue.startsWith("https://") && flagPathIsProperFile(flagFilePathTextField.getText())) {
-                downloadWebImage();
             }
         });
     }
 
+    /// Methods to open web pages from top menu bar, code duplication needs to be reduced
     @FXML
     public void openPatreonPage(){
         try {
             Desktop.getDesktop().browse(new URL("https://www.patreon.com/playerhoi").toURI());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void openGitHubPage(){
         try {
             Desktop.getDesktop().browse(new URL("https://github.com/PlayerHOI/IWFC").toURI());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void openDiscordPage(){
         try {
             Desktop.getDesktop().browse(new URL("https://discord.gg/sSCU3WS").toURI());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void openKnownIssuesPage(){
         try {
             Desktop.getDesktop().browse(new URL("https://github.com/PlayerHOI/IWFC/issues/1").toURI());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void openFlagCreatorReleasesPage(){
         try {
             Desktop.getDesktop().browse(new URL("https://github.com/PlayerHOI/IWFC/releases").toURI());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -187,6 +210,7 @@ public class MainController
         newFlagSpecs = new GenericFlagTemplate(64,64);
     }
 
+    /// Methods to increase/reduce opacity of game icons, code duplication should be reduced.
     @FXML
     public void gameIconHoverEffectHOI4(){
         hoi4GameIcon.getStyleClass().add("gameIconHoverClass");
@@ -233,19 +257,9 @@ public class MainController
             child.getStyleClass().remove("gameIconClickedClass");
         }
     }
-    /// Downloads an image from the web and creates a preview file in the source folder
-    public void downloadWebImage(){
-        try {
-            URL flagURL = new URL(flagFilePathTextField.getText());
-            BufferedImage img = ImageIO.read(flagURL);
-            ImageIO.write(img, "PNG", imageToConvert = new File("flagFilePreview.png"));
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
 
     @FXML
+    /// Executed when user clicks on "Create Flag" button
     public void createFlagButtonClick(){
         checkIfNotificationNeeded();
         setFlagCreationData();
@@ -260,6 +274,7 @@ public class MainController
         }
     }
 
+    /// Updates new flag data in case user changed some settings
     public void setFlagCreationData(){
         if(flagFilePathTextField.getText().startsWith("https://")){
             newFlagSpecs.setSourceFlagLocation(new File("flagFilePreview.png"));
@@ -268,10 +283,15 @@ public class MainController
         }
         newFlagSpecs.setOutputFolderLocation(new File(outputFolderTextField.getText()));
         newFlagSpecs.setOutputFileFolderPath(outputFolderTextField.getText());
-        newFlagSpecs.setFlagName(flagTagTextField.getText());
+        if(flagTagTextField.getText().isEmpty()){
+            newFlagSpecs.setFlagName(imageToConvert.getName());
+        }else {
+            newFlagSpecs.setFlagName(flagTagTextField.getText());
+        }
         newFlagSpecs.setFlagNameSuffix(flagSuffixTextField.getText());
     }
 
+    /// Checks if a notification is needed to notify player about a problem
     public void checkIfNotificationNeeded(){
         if(outputFolderTextField.getText().isEmpty()){
             createWarningPopup("No output folder set", "Make sure an output folder has been selected");
@@ -286,6 +306,7 @@ public class MainController
         }
     }
 
+    /// Standard method to create pop up messages
     public void createWarningPopup(String alertTitle ,String alertText){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(alertTitle);
@@ -294,6 +315,27 @@ public class MainController
         alert.showAndWait();
     }
 
+    /// Method to check if source file URL/path is a supported file format
+    public boolean flagPathIsProperFile(String flagPath){
+        if(flagPath.endsWith("jpg") || flagPath.endsWith("jpeg")
+                || flagPath.endsWith("png") || flagPath.endsWith("bmp")
+                || flagPath.endsWith("tga")) {
+            return true;
+        }
+        if(flagPath.endsWith("svg") && flagPath.contains("wikipedia.org")){
+            Alert fileNotSupportedPopup = new Alert(Alert.AlertType.ERROR);
+            fileNotSupportedPopup.setTitle("File type not supported");
+            fileNotSupportedPopup.setHeaderText("SVG files are not supported and cannot be used");
+            fileNotSupportedPopup.setContentText("It looks like you are trying to use a flag file from Wikipedia.\n" +
+                    "see 'Help' -> 'How to use' " +
+                    "on how to retrieve flags from Wikipedia.");
+            fileNotSupportedPopup.showAndWait();
+            flagFilePathTextField.clear();
+        }
+        return false;
+    }
+
+    /// Method to create flag previews
     public void generateFlagPreview(){
         if(newFlagSpecs==null){
             createWarningPopup("No Game Selected", "No game selected, click on a game icon before " +
@@ -306,25 +348,6 @@ public class MainController
             generateSingleFlagPreview();
             gameIconClickEffect();
         }
-    }
-
-    public boolean flagPathIsProperFile(String flagPath){
-        if(flagPath.endsWith("jpg") || flagPath.endsWith("jpeg")
-                || flagPath.endsWith("png") || flagPath.endsWith("bmp")
-                || flagPath.endsWith("tga")) {
-            return true;
-        }
-        if(flagPath.endsWith("svg") && flagPath.contains("wikipedia.org")){
-                Alert fileNotSupportedPopup = new Alert(Alert.AlertType.ERROR);
-            fileNotSupportedPopup.setTitle("File type not supported");
-            fileNotSupportedPopup.setHeaderText("SVG files are not supported and cannot be used");
-            fileNotSupportedPopup.setContentText("It looks like you are trying to use a flag file from Wikipedia.\n" +
-                    "see 'Help' -> 'How to use' " +
-                    "on how to retrieve flags from Wikipedia.");
-            fileNotSupportedPopup.showAndWait();
-            flagFilePathTextField.clear();
-        }
-        return false;
     }
 
     /// Generates a 3 flag preview for HOI4 flags
@@ -380,7 +403,6 @@ public class MainController
                 }
             }
         }
-
         return new ImageView(wr);
     }
 

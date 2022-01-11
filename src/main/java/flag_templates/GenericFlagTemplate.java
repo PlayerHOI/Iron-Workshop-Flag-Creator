@@ -25,16 +25,6 @@ public class GenericFlagTemplate
         baseFlagHeight = flagHeight;
     }
 
-    public void setBaseFlagWidth(int baseFlagWidth)
-    {
-        GenericFlagTemplate.baseFlagWidth = baseFlagWidth;
-    }
-
-    public void setBaseFlagHeight(int baseFlagHeight)
-    {
-        GenericFlagTemplate.baseFlagHeight = baseFlagHeight;
-    }
-
     public void setSourceFlagLocation(File sourceFlagLocation)
     {
         GenericFlagTemplate.sourceFlagLocation = sourceFlagLocation;
@@ -62,11 +52,6 @@ public class GenericFlagTemplate
     public File getSourceFlagLocation()
     {
         return sourceFlagLocation;
-    }
-
-    public File getOutputFolderLocation()
-    {
-        return outputFolderLocation;
     }
 
     public String getOutputFileFolderPath()
