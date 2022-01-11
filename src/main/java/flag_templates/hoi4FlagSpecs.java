@@ -9,28 +9,22 @@ import java.io.IOException;
 
 public class hoi4FlagSpecs extends GenericFlagTemplate
 {
-    private String outputFileFolderPath = getOutputFileFolderPath();
-    private final File outputFolderLocation = getOutputFolderLocation();
-    final int baseFlagWidth = 82;
-    final int baseFlagHeight = 52;
     final int mediumFlagWidth = 41;
     final int mediumFlagHeight = 26;
     final int smallFlagWidth = 10;
     final int smallFlagHeight = 7;
 
-    public hoi4FlagSpecs(File sourceFlagLocation, File outputFolderLocation,String outputFileFolderPath,String name,String suffix)
+    public hoi4FlagSpecs(int flagWidth, int flagHeight)
     {
-        super(sourceFlagLocation,outputFolderLocation,outputFileFolderPath,name,suffix);
+        super(flagWidth, flagHeight);
     }
-
     @Override
     public void createFlagFolders(){
         super.createFlagFolders();
         /// Medium Flags folder
-        outputFileFolderPath = outputFileFolderPath + "\\"+ "flags";
-        super.createRequiredFolders(outputFileFolderPath, "medium");
+        super.createRequiredFolders(super.getOutputFileFolderPath(), "medium");
         /// Small Flags folder
-        super.createRequiredFolders(outputFileFolderPath, "small");
+        super.createRequiredFolders(super.getOutputFileFolderPath(), "small");
     }
 
     @Override
@@ -39,23 +33,22 @@ public class hoi4FlagSpecs extends GenericFlagTemplate
         try {
             /// Creating Large Flag
             BufferedImage largeFlag = ImageIO.read(getSourceFlagLocation());
-            largeFlag = resizeImage(largeFlag,baseFlagWidth,baseFlagHeight);
-            convertToTGA(createFlipped(largeFlag),new File(outputFileFolderPath + "\\" + super.getFlagName() + super.getFlagNameSuffix() + ".tga"));
+            largeFlag = resizeImage(largeFlag,super.getBaseFlagWidth(),super.getBaseFlagHeight());
+            convertToTGA(createFlipped(largeFlag),new File(super.getOutputFileFolderPath() + "\\" + super.getFlagName() + super.getFlagNameSuffix() + ".tga"));
             /// Creating Medium Flag
             BufferedImage mediumFlag = ImageIO.read(getSourceFlagLocation());
             mediumFlag = resizeImage(mediumFlag,mediumFlagWidth,mediumFlagHeight);
-            convertToTGA(createFlipped(mediumFlag),new File(outputFileFolderPath + "\\medium\\" + super.getFlagName() + super.getFlagNameSuffix() + ".tga"));
+            convertToTGA(createFlipped(mediumFlag),new File(super.getOutputFileFolderPath() + "\\medium\\" + super.getFlagName() + super.getFlagNameSuffix() + ".tga"));
             /// Creating Small Flag
             BufferedImage smallFlag = ImageIO.read(getSourceFlagLocation());
             smallFlag = resizeImage(mediumFlag,smallFlagWidth,smallFlagHeight);
-            convertToTGA(createFlipped(smallFlag),new File(outputFileFolderPath + "\\small\\" + super.getFlagName() + super.getFlagNameSuffix() + ".tga"));
+            convertToTGA(createFlipped(smallFlag),new File(super.getOutputFileFolderPath() + "\\small\\" + super.getFlagName() + super.getFlagNameSuffix() + ".tga"));
 
         } catch (IOException e)
         {
             e.printStackTrace();
         }
     }
-
     private static BufferedImage createFlipped(BufferedImage image)
     {
         AffineTransform at = new AffineTransform();

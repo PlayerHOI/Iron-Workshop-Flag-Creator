@@ -1,8 +1,6 @@
 package com.iw.flagCreator;
 
 import com.twelvemonkeys.image.ResampleOp;
-import flag_templates.EU3FlagSpecs;
-import flag_templates.EU4FlagSpecs;
 import flag_templates.GenericFlagTemplate;
 import flag_templates.hoi4FlagSpecs;
 import javafx.beans.value.ObservableValue;
@@ -66,9 +64,6 @@ public class MainController
     protected TextField flagSuffixTextField;
 
     @FXML
-    public Label notificationsLabel;
-
-    @FXML
     protected HBox flagPreviewElement;
 
     @FXML
@@ -83,18 +78,17 @@ public class MainController
     @FXML
     protected Label flagCreatorVersionLabel;
 
-    String dummyFlagFilePath = "flagTemplateFile.png";
-    File imageToConvert = new File(dummyFlagFilePath);
-    File outputImage = new File("");
-    GenericFlagTemplate newFlagSpecs = null;
     final String flagCreatorVersion = "1.0";
+    File imageToConvert;
+    GenericFlagTemplate newFlagSpecs = new GenericFlagTemplate(93,64);
 
     @FXML
     public void initialize(){
         flagCreatorVersionLabel.setText("Version: " + flagCreatorVersion);
         openAboutPopup();
         /// Listener to flag source text field to prevent generating preview when no file is loaded
-        flagFilePathTextField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+        flagFilePathTextField.textProperty().addListener((ObservableValue<? extends String> observable,
+                                                          String oldValue, String newValue) -> {
             // Disable Preview Button if no flag is loaded
             if (!(newValue.isEmpty()) && flagPathIsProperFile(flagFilePathTextField.getText())) {
                 imageToConvert = new File(flagFilePathTextField.getText());
@@ -110,6 +104,9 @@ public class MainController
             }
             if (newValue.isEmpty() || (!flagPathIsProperFile(flagFilePathTextField.getText()))) {
                 createFlagButton.setDisable(true);
+            }
+            if(newValue.startsWith("https://") && flagPathIsProperFile(flagFilePathTextField.getText())) {
+                downloadWebImage();
             }
         });
     }
@@ -153,8 +150,8 @@ public class MainController
         aboutPopup.setTitle("Iron Workshop Flag Creator " + flagCreatorVersion);
         aboutPopup.setHeaderText("Created by PlayerHOI\nA product of the Iron Workshop\nironworkshopbiz@gmail.com\n");
         aboutPopup.setContentText("Use this software at your own discretion, any consequence of using this software" +
-                " is the sole responsibility of the user.\n\nClick on 'Help' -> 'How to use' section for instructions on how " +
-                "to use the flag creator.\n\nSupported file formats: JPEG, JPG, TGA, PNG and BMP.");
+                " is the sole responsibility of the user.\n\nClick on 'Help' -> 'How to use' section for" +
+                " instructions on how " + "to use the flag creator.\n\nSupported file formats: JPEG, JPG, TGA, PNG and BMP.");
         aboutPopup.setWidth(200);
         aboutPopup.setHeight(500);
         aboutPopup.showAndWait();
@@ -165,32 +162,29 @@ public class MainController
     public void createFlagHoi4(){
         gameIconClickEffect();
         hoi4GameIcon.getStyleClass().add("gameIconClickedClass");
-        newFlagSpecs = new hoi4FlagSpecs(imageToConvert,
-                outputImage,outputFolderTextField.getText(),flagTagTextField.getText(),flagSuffixTextField.getText());
+        /// HOI4 needs an instance created to make sure that flag preview generates 3 flags instead of one
+        newFlagSpecs = new hoi4FlagSpecs(82,52);
     }
 
     @FXML
     public void createFlagVic2(){
         gameIconClickEffect();
         hoi3GameIcon.getStyleClass().add("gameIconClickedClass");
-        newFlagSpecs = new GenericFlagTemplate(imageToConvert,outputImage,outputFolderTextField.getText(),
-                flagTagTextField.getText(),flagSuffixTextField.getText());
+        newFlagSpecs = new GenericFlagTemplate(93,64);
     }
 
     @FXML
     public void createFlagEU4(){
         gameIconClickEffect();
         eu4GameIcon.getStyleClass().add("gameIconClickedClass");
-        newFlagSpecs = new EU4FlagSpecs(imageToConvert,outputImage,outputFolderTextField.getText(),
-                flagTagTextField.getText(),flagSuffixTextField.getText());
+        newFlagSpecs = new GenericFlagTemplate(128,128);
     }
 
     @FXML
     public void createFlagEU3(){
         gameIconClickEffect();
         eu3GameIcon.getStyleClass().add("gameIconClickedClass");
-        newFlagSpecs = new EU3FlagSpecs(imageToConvert,outputImage,outputFolderTextField.getText()
-                ,flagTagTextField.getText(),flagSuffixTextField.getText());
+        newFlagSpecs = new GenericFlagTemplate(64,64);
     }
 
     @FXML
@@ -239,36 +233,43 @@ public class MainController
             child.getStyleClass().remove("gameIconClickedClass");
         }
     }
-
-    public void checkIfFlagObjectExists(){
-        if(flagFilePathTextField.getText().startsWith("https://")){
-            imageToConvert = new File(dummyFlagFilePath);
-            try {
-                URL flagURL = new URL(flagFilePathTextField.getText());
-                BufferedImage img = ImageIO.read(flagURL);
-                ImageIO.write(img, "png", imageToConvert);
-            } catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+    /// Downloads an image from the web and creates a preview file in the source folder
+    public void downloadWebImage(){
+        try {
+            URL flagURL = new URL(flagFilePathTextField.getText());
+            BufferedImage img = ImageIO.read(flagURL);
+            ImageIO.write(img, "PNG", imageToConvert = new File("flagFilePreview.png"));
+        } catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 
     @FXML
     public void createFlagButtonClick(){
         checkIfNotificationNeeded();
-        gameIconClickEffect();
+        setFlagCreationData();
         newFlagSpecs.createFlagFolders();
-        checkIfFlagObjectExists();
         try
         {
-            newFlagSpecs.setFlagName(flagTagTextField.getText());
             newFlagSpecs.createFlag();
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+    }
+
+    public void setFlagCreationData(){
+        if(flagFilePathTextField.getText().startsWith("https://")){
+            newFlagSpecs.setSourceFlagLocation(new File("flagFilePreview.png"));
+        }else{
+            newFlagSpecs.setSourceFlagLocation(new File(flagFilePathTextField.getText()));
+        }
+        newFlagSpecs.setOutputFolderLocation(new File(outputFolderTextField.getText()));
+        newFlagSpecs.setOutputFileFolderPath(outputFolderTextField.getText());
+        newFlagSpecs.setFlagName(flagTagTextField.getText());
+        newFlagSpecs.setFlagNameSuffix(flagSuffixTextField.getText());
     }
 
     public void checkIfNotificationNeeded(){
@@ -300,6 +301,7 @@ public class MainController
         }
         if(newFlagSpecs instanceof hoi4FlagSpecs){
             generateThreeFlagPreview();
+            System.out.println("Generating 3 flag preview");
         }else {
             generateSingleFlagPreview();
             gameIconClickEffect();
@@ -330,7 +332,6 @@ public class MainController
         /// Removes all flags from Node to prevent buildup of too many flags
         flagPreviewElement.getChildren().removeAll(flagPreviewElement.getChildren());
         /// Resets imageToConvert to prevent conflict and writes flag from URL
-        checkIfFlagObjectExists();
         try {
             flagPreviewElement.setSpacing(20);
             // First Flag
@@ -356,7 +357,6 @@ public class MainController
         /// Removes all flags from Node to prevent buildup of too many flags
         flagPreviewElement.getChildren().removeAll(flagPreviewElement.getChildren());
         /// Resets imageToConvert to prevent conflict and writes flag from URL
-        checkIfFlagObjectExists();
         try {
             BufferedImage flagPreviewLarge = ImageIO.read(imageToConvert);
             flagPreviewLarge = resizeImage(flagPreviewLarge,newFlagSpecs.getBaseFlagWidth(),newFlagSpecs.getBaseFlagHeight());

@@ -98,7 +98,7 @@
       </Label>
       <HBox alignment="CENTER" layoutX="38.0" layoutY="161.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="87.0" prefWidth="725.0" styleClass="appSectionFrame" stylesheets="@styles/style.css" AnchorPane.bottomAnchor="402.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="161.0">
          <children>
-            <Label text="*Flag Name Prefix">
+            <Label text="*Flag File Name">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
@@ -106,7 +106,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="flagTagTextField" prefHeight="37.0" prefWidth="150.0" promptText="Country TAG" />
+            <TextField fx:id="flagTagTextField" maxHeight="37.0" minHeight="37.0" prefHeight="37.0" prefWidth="150.0" promptText="Country TAG" />
             <Label text="Flag Name Suffix">
                <HBox.margin>
                   <Insets left="100.0" right="5.0" />
@@ -115,7 +115,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="flagSuffixTextField" prefHeight="37.0" prefWidth="150.0" promptText="Flag Ideology (if required)" />
+            <TextField fx:id="flagSuffixTextField" maxHeight="37.0" minHeight="37.0" prefHeight="37.0" prefWidth="150.0" promptText="Flag Ideology (if required)" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -154,11 +154,6 @@
          </effect></Button>
       <Label fx:id="flagCreatorVersionLabel" layoutX="38.0" layoutY="591.0" text="Version: 1.0" />
       <Button fx:id="previewFlagButton" alignment="CENTER" disable="true" layoutX="660.0" layoutY="436.0" mnemonicParsing="false" onAction="#generateFlagPreview" prefHeight="111.0" prefWidth="94.0" text="Preview Flag" textAlignment="CENTER" wrapText="true" />
-      <Label fx:id="notificationsLabel" layoutX="37.0" layoutY="450.0" text=" ">
-         <padding>
-            <Insets left="10.0" />
-         </padding>
-      </Label>
       <ImageView fx:id="patreonIcon" fitHeight="20.0" fitWidth="94.0" layoutX="676.0" layoutY="45.0" onMouseClicked="#openPatreonPage" preserveRatio="true">
          <image>
             <Image url="@patreonIcon.png" />

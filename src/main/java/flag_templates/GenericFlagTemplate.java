@@ -16,16 +16,47 @@ public class GenericFlagTemplate
     private static String outputFileFolderPath;
     private static String flagName;
     private static String flagNameSuffix;
-    private final int baseFlagWidth = 93;
-    private final int baseFlagHeight = 64;
+    private static int baseFlagWidth = 93;
+    private static int baseFlagHeight = 64;
 
-    public GenericFlagTemplate(File sourceFlagFile, File outputFile,String outputFilePathString,String name,String suffix)
+    public GenericFlagTemplate(int flagWidth, int flagHeight)
     {
-        sourceFlagLocation = sourceFlagFile;
-        outputFolderLocation = outputFile;
-        outputFileFolderPath = outputFilePathString;
-        flagName = name;
-        flagNameSuffix = suffix;
+        baseFlagWidth = flagWidth;
+        baseFlagHeight = flagHeight;
+    }
+
+    public void setBaseFlagWidth(int baseFlagWidth)
+    {
+        GenericFlagTemplate.baseFlagWidth = baseFlagWidth;
+    }
+
+    public void setBaseFlagHeight(int baseFlagHeight)
+    {
+        GenericFlagTemplate.baseFlagHeight = baseFlagHeight;
+    }
+
+    public void setSourceFlagLocation(File sourceFlagLocation)
+    {
+        GenericFlagTemplate.sourceFlagLocation = sourceFlagLocation;
+    }
+
+    public void setOutputFolderLocation(File outputFolderLocation)
+    {
+        GenericFlagTemplate.outputFolderLocation = outputFolderLocation;
+    }
+
+    public void setOutputFileFolderPath(String outputFileFolderPath)
+    {
+        GenericFlagTemplate.outputFileFolderPath = outputFileFolderPath;
+    }
+
+    public void setFlagName(String name){
+        GenericFlagTemplate.flagName = name;
+    }
+
+    public void setFlagNameSuffix(String flagNameSuffix)
+    {
+        GenericFlagTemplate.flagNameSuffix = flagNameSuffix;
     }
 
     public File getSourceFlagLocation()
@@ -75,10 +106,6 @@ public class GenericFlagTemplate
         File newFolderCreator = new File(folderPath + "\\" + folderName);
         System.out.println(folderPath+folderName);
         newFolderCreator.mkdir();
-    }
-
-    public void setFlagName(String name){
-        flagName = name;
     }
 
     //////////////////////////////////////////////////////////////////////////////////
