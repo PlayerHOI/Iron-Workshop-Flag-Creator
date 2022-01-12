@@ -1,5 +1,9 @@
 package com.iw.flagCreator;
 
+import org.apache.batik.transcoder.TranscoderException;
+import org.apache.batik.transcoder.image.PNGTranscoder;
+import org.apache.batik.transcoder.TranscoderInput;
+import org.apache.batik.transcoder.TranscoderOutput;
 import com.twelvemonkeys.image.ResampleOp;
 import flag_templates.GenericFlagTemplate;
 import flag_templates.hoi4FlagSpecs;
@@ -21,8 +25,12 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
-import java.io.File;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Paths;
 
 public class MainController
 {
@@ -90,20 +98,39 @@ public class MainController
         flagFilePathTextField.textProperty().addListener((ObservableValue<? extends String> observable,
                                                           String oldValue, String newValue) -> {
             // Enable preview & create button if a flag file is loaded
-            if (!(newValue.isEmpty()) && flagPathIsProperFile(newValue)) {
+            if (!(newValue.isEmpty()) && checkFlagSourceCorrectness(newValue)) {
                 previewFlagButton.setDisable(false);
             }
             // Disable preview & create button if no flag is loaded
-            if (newValue.isEmpty() || (!flagPathIsProperFile(newValue))) {
+            if (newValue.isEmpty() || (!checkFlagSourceCorrectness(newValue))) {
                 previewFlagButton.setDisable(true);
             }
+            if(!(newValue.startsWith("https://")) && newValue.endsWith(".svg")) {
+                try
+                {
+                    convertSVGtoPNG(flagFilePathTextField.getText());
+                } catch (MalformedURLException | FileNotFoundException | URISyntaxException e)
+                {
+                    e.printStackTrace();
+                }
+            }
             /// Downloads an image from the web and creates a preview file in the source folder
-            if(newValue.startsWith("https://") && flagPathIsProperFile(flagFilePathTextField.getText())) {
+            if(newValue.startsWith("https://") && checkFlagSourceCorrectness(newValue) && !(newValue.endsWith(".svg"))) {
                 try {
                     URL flagURL = new URL(flagFilePathTextField.getText());
                     BufferedImage img = ImageIO.read(flagURL);
                     ImageIO.write(img, "PNG", imageToConvert = new File("flagFilePreview.png"));
                 } catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            /// Special case to handle web SVG files
+            if(newValue.startsWith("https://") && (newValue.endsWith(".svg"))) {
+                try
+                {
+                    downloadSVGImage();
+                } catch (MalformedURLException | FileNotFoundException | URISyntaxException e)
                 {
                     e.printStackTrace();
                 }
@@ -121,6 +148,56 @@ public class MainController
                 createFlagButton.setDisable(true);
             }
         });
+    }
+
+    public void downloadSVGImage() throws MalformedURLException, FileNotFoundException, URISyntaxException
+    {
+        try (BufferedInputStream in = new BufferedInputStream(new URL(flagFilePathTextField.getText()).openStream());
+             FileOutputStream fileOutputStream = new FileOutputStream("DownloadedSVG.svg")) {
+            byte dataBuffer[] = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+                fileOutputStream.write(dataBuffer, 0, bytesRead);
+            }
+        } catch (IOException e) {
+            // handle exception
+        }
+        convertSVGtoPNG("DownloadedSVG.svg");
+        /// Deletes the downloaded SVG file
+        File downloadedSVGFile = new File("DownloadedSVG.svg");
+        downloadedSVGFile.delete();
+    }
+
+    public void convertSVGtoPNG(String svgFilePath) throws MalformedURLException, FileNotFoundException, URISyntaxException
+    {
+
+        //Step -1: We read the input SVG document into Transcoder Input
+        //We use Java NIO for this purpose
+
+        String svg_URI_input = Paths.get(svgFilePath).toUri().toURL().toString();
+        TranscoderInput input_svg_image = new TranscoderInput(svg_URI_input);
+        //Step-2: Define OutputStream to PNG Image and attach to TranscoderOutput
+        OutputStream png_ostream = new FileOutputStream(imageToConvert = new File("flagFilePreview.png"));
+        TranscoderOutput output_png_image = new TranscoderOutput(png_ostream);
+        // Step-3: Create PNGTranscoder and define hints if required
+        PNGTranscoder my_converter = new PNGTranscoder();
+        // Step-4: Convert and Write output
+        try
+        {
+            my_converter.transcode(input_svg_image, output_png_image);
+        } catch (TranscoderException e)
+        {
+            e.printStackTrace();
+        }
+        // Step 5- close / flush Output Stream
+        try
+        {
+            png_ostream.flush();
+            png_ostream.close();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /// Methods to open web pages from top menu bar, code duplication needs to be reduced
@@ -174,7 +251,7 @@ public class MainController
         aboutPopup.setHeaderText("Created by PlayerHOI\nA product of the Iron Workshop\nironworkshopbiz@gmail.com\n");
         aboutPopup.setContentText("Use this software at your own discretion, any consequence of using this software" +
                 " is the sole responsibility of the user.\n\nClick on 'Help' -> 'How to use' section for" +
-                " instructions on how " + "to use the flag creator.\n\nSupported file formats: JPEG, JPG, TGA, PNG and BMP.");
+                " instructions on how " + "to use the flag creator.\n\nSupported file formats: JPEG, JPG, TGA, PNG, BMP and SVG.");
         aboutPopup.setWidth(200);
         aboutPopup.setHeight(500);
         aboutPopup.showAndWait();
@@ -294,7 +371,7 @@ public class MainController
     /// Checks if a notification is needed to notify player about a problem
     public void checkIfNotificationNeeded(){
         if(outputFolderTextField.getText().isEmpty()){
-            createWarningPopup("No output folder set", "Make sure an output folder has been selected");
+            createWarningPopup("No output folder set", "Make sure an output folder has been selected.");
         }
         if(newFlagSpecs==null){
             createWarningPopup("No Game Selected", "Click on a game icon before creating the flag");
@@ -316,22 +393,23 @@ public class MainController
     }
 
     /// Method to check if source file URL/path is a supported file format
-    public boolean flagPathIsProperFile(String flagPath){
+    public boolean checkFlagSourceCorrectness(String flagPath){
         if(flagPath.endsWith("jpg") || flagPath.endsWith("jpeg")
                 || flagPath.endsWith("png") || flagPath.endsWith("bmp")
-                || flagPath.endsWith("tga")) {
+                || flagPath.endsWith("tga") || flagPath.endsWith("svg")) {
             return true;
         }
-        if(flagPath.endsWith("svg") && flagPath.contains("wikipedia.org")){
-            Alert fileNotSupportedPopup = new Alert(Alert.AlertType.ERROR);
-            fileNotSupportedPopup.setTitle("File type not supported");
-            fileNotSupportedPopup.setHeaderText("SVG files are not supported and cannot be used");
-            fileNotSupportedPopup.setContentText("It looks like you are trying to use a flag file from Wikipedia.\n" +
-                    "see 'Help' -> 'How to use' " +
-                    "on how to retrieve flags from Wikipedia.");
-            fileNotSupportedPopup.showAndWait();
-            flagFilePathTextField.clear();
-        }
+//        if(flagPath.endsWith("svg") && flagPath.contains("wikipedia.org")){
+//            flagFilePathTextField.clear();
+//            Alert fileNotSupportedPopup = new Alert(Alert.AlertType.ERROR);
+//            fileNotSupportedPopup.setTitle("File type not supported");
+//            fileNotSupportedPopup.setHeaderText("SVG files are not supported and cannot be used");
+//            fileNotSupportedPopup.setContentText("It looks like you are trying to use a flag file from Wikipedia.\n" +
+//                    "see 'Help' -> 'How to use' " +
+//                    "on how to retrieve flags from Wikipedia.");
+//            fileNotSupportedPopup.showAndWait();
+//            return false;
+//        }
         return false;
     }
 

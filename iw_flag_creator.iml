@@ -31,5 +31,26 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.7.1" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-transcoder:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-bridge:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-gvt:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-awt-util:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-util:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-gui-util:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-ext:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: xml-apis:xmlParserAPIs:2.0.2" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-script:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: rhino:js:1.5R4.1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-svg-dom:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-dom:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-css:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-xml:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-parser:1.6-1" level="project" />
+    <orderEntry type="library" name="Maven: fop:fop:0.20.5" level="project" />
+    <orderEntry type="library" name="Maven: batik:batik-1.5-fop:0.20-5" level="project" />
+    <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.0.b2" level="project" />
+    <orderEntry type="library" name="Maven: xalan:xalan:2.4.1" level="project" />
+    <orderEntry type="library" name="Maven: xerces:xercesImpl:2.2.1" level="project" />
+    <orderEntry type="library" name="Maven: avalon-framework:avalon-framework:4.0" level="project" />
   </component>
 </module>

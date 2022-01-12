@@ -5,6 +5,7 @@ module com.iw.iw_flag_creator {
     requires com.twelvemonkeys.imageio.tga;
     requires com.twelvemonkeys.common.image;
     requires org.apache.commons.io;
+    requires batik.transcoder;
 
 
     opens com.iw.flagCreator to javafx.fxml;
