@@ -1,6 +1,7 @@
 package com.iw.flagCreator;
 
 import org.apache.batik.transcoder.TranscoderException;
+import org.apache.batik.transcoder.image.JPEGTranscoder;
 import org.apache.batik.transcoder.image.PNGTranscoder;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
@@ -26,11 +27,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Paths;
 
 public class MainController
 {
@@ -99,20 +97,16 @@ public class MainController
                                                           String oldValue, String newValue) -> {
             // Enable preview & create button if a flag file is loaded
             if (!(newValue.isEmpty()) && checkFlagSourceCorrectness(newValue)) {
+                //imageToConvert = new File(flagFilePathTextField.getText());
                 previewFlagButton.setDisable(false);
             }
             // Disable preview & create button if no flag is loaded
             if (newValue.isEmpty() || (!checkFlagSourceCorrectness(newValue))) {
                 previewFlagButton.setDisable(true);
             }
-            if(!(newValue.startsWith("https://")) && newValue.endsWith(".svg")) {
-                try
-                {
-                    convertSVGtoPNG(flagFilePathTextField.getText());
-                } catch (MalformedURLException | FileNotFoundException | URISyntaxException e)
-                {
-                    e.printStackTrace();
-                }
+            /*  SVG format logic, currently not working once project is built into a jar file
+            if(!(newValue.startsWith("https://")) && newValue.endsWith("svg")) {
+                convertImageToSVG(imageToConvert);
             }
             /// Downloads an image from the web and creates a preview file in the source folder
             if(newValue.startsWith("https://") && checkFlagSourceCorrectness(newValue) && !(newValue.endsWith(".svg"))) {
@@ -126,15 +120,17 @@ public class MainController
                 }
             }
             /// Special case to handle web SVG files
-            if(newValue.startsWith("https://") && (newValue.endsWith(".svg"))) {
+            if(newValue.startsWith("https://") && (newValue.endsWith("svg"))) {
                 try
                 {
                     downloadSVGImage();
-                } catch (MalformedURLException | FileNotFoundException | URISyntaxException e)
+                } catch (URISyntaxException | IOException e)
                 {
                     e.printStackTrace();
                 }
             }
+
+             */
         });
         /// Listener to output folder text field to unlock create flag button
         outputFolderTextField.textProperty().addListener((ObservableValue<? extends String> observable,
@@ -150,7 +146,7 @@ public class MainController
         });
     }
 
-    public void downloadSVGImage() throws MalformedURLException, FileNotFoundException, URISyntaxException
+    public void downloadSVGImage() throws IOException, URISyntaxException
     {
         try (BufferedInputStream in = new BufferedInputStream(new URL(flagFilePathTextField.getText()).openStream());
              FileOutputStream fileOutputStream = new FileOutputStream("DownloadedSVG.svg")) {
@@ -162,42 +158,42 @@ public class MainController
         } catch (IOException e) {
             // handle exception
         }
-        convertSVGtoPNG("DownloadedSVG.svg");
-        /// Deletes the downloaded SVG file
         File downloadedSVGFile = new File("DownloadedSVG.svg");
-        downloadedSVGFile.delete();
+        convertImageToSVG(downloadedSVGFile);
+        /// Deletes the downloaded SVG file
+        downloadedSVGFile.deleteOnExit();
     }
 
-    public void convertSVGtoPNG(String svgFilePath) throws MalformedURLException, FileNotFoundException, URISyntaxException
+    public void convertImageToSVG(File svgFileToRead)
     {
-
-        //Step -1: We read the input SVG document into Transcoder Input
-        //We use Java NIO for this purpose
-
-        String svg_URI_input = Paths.get(svgFilePath).toUri().toURL().toString();
-        TranscoderInput input_svg_image = new TranscoderInput(svg_URI_input);
-        //Step-2: Define OutputStream to PNG Image and attach to TranscoderOutput
-        OutputStream png_ostream = new FileOutputStream(imageToConvert = new File("flagFilePreview.png"));
-        TranscoderOutput output_png_image = new TranscoderOutput(png_ostream);
-        // Step-3: Create PNGTranscoder and define hints if required
-        PNGTranscoder my_converter = new PNGTranscoder();
-        // Step-4: Convert and Write output
-        try
-        {
-            my_converter.transcode(input_svg_image, output_png_image);
-        } catch (TranscoderException e)
-        {
-            e.printStackTrace();
-        }
-        // Step 5- close / flush Output Stream
-        try
-        {
-            png_ostream.flush();
-            png_ostream.close();
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+//        try {
+//            File testFile = new File("C:\\Users\\PlayerPC\\Desktop\\Flag_of_the_United_States.csv");
+//            BufferedImage image = ImageIO.read(testFile);
+//            ImageIO.write(image, "png", imageToConvert = new File("test.png"));
+//        } catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+//        try {
+//            //This works only in the IDE and refuses to work when Java file is created
+//            String svgUriImputLocation = Paths.get("C:\\Users\\PlayerPC\\Desktop\\Flag_of_the_United_States.csv").toUri().toURL().toString();
+//            TranscoderInput transcoderInput = new TranscoderInput(svgUriImputLocation);
+//
+//            // Define OutputStream Location
+//            OutputStream outputStream = new FileOutputStream(imageToConvert = new File("flagFilePreview.png"));
+//            TranscoderOutput transcoderOutput = new TranscoderOutput(outputStream);
+//
+//            // Convert SVG to PNG and Save to File System
+//            PNGTranscoder pngTranscoder = new PNGTranscoder();
+//            pngTranscoder.transcode(transcoderInput, transcoderOutput);
+//
+//            // Clean Up
+//            outputStream.flush();
+//            outputStream.close();
+//
+//        } catch (Exception e) {
+//            System.out.println("");
+//        }
     }
 
     /// Methods to open web pages from top menu bar, code duplication needs to be reduced
@@ -394,11 +390,9 @@ public class MainController
 
     /// Method to check if source file URL/path is a supported file format
     public boolean checkFlagSourceCorrectness(String flagPath){
-        if(flagPath.endsWith("jpg") || flagPath.endsWith("jpeg")
+        return flagPath.endsWith("jpg") || flagPath.endsWith("jpeg")
                 || flagPath.endsWith("png") || flagPath.endsWith("bmp")
-                || flagPath.endsWith("tga") || flagPath.endsWith("svg")) {
-            return true;
-        }
+                || flagPath.endsWith("tga") || flagPath.endsWith("svg");
 //        if(flagPath.endsWith("svg") && flagPath.contains("wikipedia.org")){
 //            flagFilePathTextField.clear();
 //            Alert fileNotSupportedPopup = new Alert(Alert.AlertType.ERROR);
@@ -410,7 +404,6 @@ public class MainController
 //            fileNotSupportedPopup.showAndWait();
 //            return false;
 //        }
-        return false;
     }
 
     /// Method to create flag previews

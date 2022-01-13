@@ -11,26 +11,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: com.twelvemonkeys.imageio:imageio-tga:3.8.0" level="project" />
-    <orderEntry type="library" name="Maven: com.twelvemonkeys.imageio:imageio-core:3.8.0" level="project" />
-    <orderEntry type="library" name="Maven: com.twelvemonkeys.common:common-lang:3.8.0" level="project" />
-    <orderEntry type="library" name="Maven: com.twelvemonkeys.common:common-io:3.8.0" level="project" />
-    <orderEntry type="library" name="Maven: com.twelvemonkeys.common:common-image:3.8.0" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:17.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:17.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:17.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:17.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:17.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:17.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:17.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:17.0.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.7.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-commons:1.7.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.7.1" level="project" />
-    <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
     <orderEntry type="library" name="Maven: batik:batik-transcoder:1.6-1" level="project" />
     <orderEntry type="library" name="Maven: batik:batik-bridge:1.6-1" level="project" />
     <orderEntry type="library" name="Maven: batik:batik-gvt:1.6-1" level="project" />
@@ -52,5 +32,31 @@
     <orderEntry type="library" name="Maven: xalan:xalan:2.4.1" level="project" />
     <orderEntry type="library" name="Maven: xerces:xercesImpl:2.2.1" level="project" />
     <orderEntry type="library" name="Maven: avalon-framework:avalon-framework:4.0" level="project" />
+    <orderEntry type="library" name="Maven: com.twelvemonkeys.imageio:imageio-batik:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.twelvemonkeys.imageio:imageio-core:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.twelvemonkeys.common:common-lang:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.twelvemonkeys.common:common-io:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.twelvemonkeys.common:common-image:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.twelvemonkeys.imageio:imageio-tga:3.8.0" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:17.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:17.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:17.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:17.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:17.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:17.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:17.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:17.0.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.7.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apiguardian:apiguardian-api:1.1.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-commons:1.7.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.7.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.7.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
+    <orderEntry type="library" name="Maven: org.testng:testng:7.5" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.findbugs:jsr305:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.32" level="project" />
+    <orderEntry type="library" name="Maven: com.beust:jcommander:1.78" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.webjars:jquery:3.5.1" level="project" />
   </component>
 </module>
