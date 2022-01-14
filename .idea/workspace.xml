@@ -10,27 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0dcb7c8-b6cc-4584-bf04-cc368177fb3b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_beust_jcommander_1_78.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_twelvemonkeys_imageio_imageio_batik_3_2_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_32.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_testng_testng_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_webjars_jquery_3_5_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/iw_flag_creator_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/iw_flag_creator_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_twelvemonkeys_common_common_image_3_8_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_twelvemonkeys_common_common_image_3_2_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_twelvemonkeys_common_common_io_3_8_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_twelvemonkeys_common_common_io_3_2_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_twelvemonkeys_common_common_lang_3_8_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_twelvemonkeys_common_common_lang_3_2_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_twelvemonkeys_imageio_imageio_core_3_8_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_twelvemonkeys_imageio_imageio_core_3_2_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iw_flag_creator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/iw_flag_creator.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/flagTemplateFile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/iw_flag_creator_jar/flagFilePreview.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/iw_flag_creator_jar/iw_flag_creator.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/iw_flag_creator_jar/iw_flag_creator.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/iw/flagCreator/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iw/flagCreator/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iw/flagCreator/MyLauncher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/iw/flagCreator/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/iw/flagCreator/main-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/iw/flagCreator/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/iw/flagCreator/MainController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/iw/flagCreator/MyLauncher.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/iw/flagCreator/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/iw/flagCreator/main-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +56,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../batik-1.14/lib/fop-transcoder-allinone-2.6.jar" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.32217574" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -143,7 +130,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/iw/flagCreator/MainController.java</url>
-          <line>317</line>
+          <line>325</line>
           <properties class="com.iw.flagCreator.MainController" method="gameIconRemoveHoverEffectEU3">
             <option name="EMULATED" value="true" />
           </properties>

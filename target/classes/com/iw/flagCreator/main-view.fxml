@@ -23,7 +23,7 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#openAboutPopup" text="About" />
                   <MenuItem mnemonicParsing="false" onAction="#openKnownIssuesPage" text="Known Issues" />
-                  <MenuItem mnemonicParsing="false" text="How to Use" />
+                  <MenuItem mnemonicParsing="false" onAction="#openYouTubeInfoVideo" text="How to Use" />
                   <MenuItem mnemonicParsing="false" onAction="#openFlagCreatorReleasesPage" text="Check for updates" />
             </items>
           </Menu>

@@ -84,7 +84,7 @@ public class MainController
     @FXML
     protected Label flagCreatorVersionLabel;
 
-    final String flagCreatorVersion = "1.0";
+    final String flagCreatorVersion = "1.1";
     File imageToConvert;
     GenericFlagTemplate newFlagSpecs = new GenericFlagTemplate(93,64);
 
@@ -97,16 +97,12 @@ public class MainController
                                                           String oldValue, String newValue) -> {
             // Enable preview & create button if a flag file is loaded
             if (!(newValue.isEmpty()) && checkFlagSourceCorrectness(newValue)) {
-                //imageToConvert = new File(flagFilePathTextField.getText());
+                imageToConvert = new File(flagFilePathTextField.getText());
                 previewFlagButton.setDisable(false);
             }
             // Disable preview & create button if no flag is loaded
             if (newValue.isEmpty() || (!checkFlagSourceCorrectness(newValue))) {
                 previewFlagButton.setDisable(true);
-            }
-            /*  SVG format logic, currently not working once project is built into a jar file
-            if(!(newValue.startsWith("https://")) && newValue.endsWith("svg")) {
-                convertImageToSVG(imageToConvert);
             }
             /// Downloads an image from the web and creates a preview file in the source folder
             if(newValue.startsWith("https://") && checkFlagSourceCorrectness(newValue) && !(newValue.endsWith(".svg"))) {
@@ -119,6 +115,10 @@ public class MainController
                     e.printStackTrace();
                 }
             }
+            /*  SVG format logic, currently not working once project is built into a jar file
+            if(!(newValue.startsWith("https://")) && newValue.endsWith("svg")) {
+                convertImageToSVG(imageToConvert);
+            }
             /// Special case to handle web SVG files
             if(newValue.startsWith("https://") && (newValue.endsWith("svg"))) {
                 try
@@ -129,7 +129,6 @@ public class MainController
                     e.printStackTrace();
                 }
             }
-
              */
         });
         /// Listener to output folder text field to unlock create flag button
@@ -198,6 +197,14 @@ public class MainController
 
     /// Methods to open web pages from top menu bar, code duplication needs to be reduced
     @FXML
+    public void openYouTubeInfoVideo(){
+        try {
+            Desktop.getDesktop().browse(new URL("https://youtu.be/sHpO5SG_Tgg").toURI());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
     public void openPatreonPage(){
         try {
             Desktop.getDesktop().browse(new URL("https://www.patreon.com/playerhoi").toURI());
@@ -247,7 +254,8 @@ public class MainController
         aboutPopup.setHeaderText("Created by PlayerHOI\nA product of the Iron Workshop\nironworkshopbiz@gmail.com\n");
         aboutPopup.setContentText("Use this software at your own discretion, any consequence of using this software" +
                 " is the sole responsibility of the user.\n\nClick on 'Help' -> 'How to use' section for" +
-                " instructions on how " + "to use the flag creator.\n\nSupported file formats: JPEG, JPG, TGA, PNG, BMP and SVG.");
+                " instructions on how " + "to use the flag creator.\n\nSupported file formats:" +
+                " JPEG, JPG, TGA, PNG and BMP.");
         aboutPopup.setWidth(200);
         aboutPopup.setHeight(500);
         aboutPopup.showAndWait();
@@ -390,20 +398,20 @@ public class MainController
 
     /// Method to check if source file URL/path is a supported file format
     public boolean checkFlagSourceCorrectness(String flagPath){
+        if(flagPath.endsWith("svg") && flagPath.contains("wikipedia.org")){
+            flagFilePathTextField.clear();
+            Alert fileNotSupportedPopup = new Alert(Alert.AlertType.ERROR);
+            fileNotSupportedPopup.setTitle("File type not supported");
+            fileNotSupportedPopup.setHeaderText("SVG files are not supported and cannot be used");
+            fileNotSupportedPopup.setContentText("It looks like you are trying to use a flag file from Wikipedia.\n" +
+                    "see 'Help' -> 'How to use' " +
+                    "on how to retrieve flags from Wikipedia.");
+            fileNotSupportedPopup.showAndWait();
+            return false;
+        }
         return flagPath.endsWith("jpg") || flagPath.endsWith("jpeg")
                 || flagPath.endsWith("png") || flagPath.endsWith("bmp")
                 || flagPath.endsWith("tga") || flagPath.endsWith("svg");
-//        if(flagPath.endsWith("svg") && flagPath.contains("wikipedia.org")){
-//            flagFilePathTextField.clear();
-//            Alert fileNotSupportedPopup = new Alert(Alert.AlertType.ERROR);
-//            fileNotSupportedPopup.setTitle("File type not supported");
-//            fileNotSupportedPopup.setHeaderText("SVG files are not supported and cannot be used");
-//            fileNotSupportedPopup.setContentText("It looks like you are trying to use a flag file from Wikipedia.\n" +
-//                    "see 'Help' -> 'How to use' " +
-//                    "on how to retrieve flags from Wikipedia.");
-//            fileNotSupportedPopup.showAndWait();
-//            return false;
-//        }
     }
 
     /// Method to create flag previews
