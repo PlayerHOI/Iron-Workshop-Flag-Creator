@@ -102,6 +102,7 @@ public class GenericFlagTemplate
         BufferedImage image = ImageIO.read(sourceFlagLocation);
         image = resizeImage(image,this.getBaseFlagWidth(),this.getBaseFlagHeight());
         convertToTGA(image,outputFolderLocation);
+		Desktop.getDesktop().open(new File(outputFileFolderPath));
     }
     public BufferedImage resizeImage(BufferedImage imageToResize, int width, int height)
     {
