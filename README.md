@@ -19,5 +19,6 @@ Currently, the Flag Converter only works on **Windows OS**.
 - TGA
 - PNG
 - BMP
+- SVG
 ## Credits
 Image conversion and positioning executed by TwelveMonkeys ImageIO API: https://github.com/haraldk/TwelveMonkeys
