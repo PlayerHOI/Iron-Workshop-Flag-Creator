@@ -116,29 +116,29 @@ public class GenericFlagTemplate
                 System.out.println("Failed");
             }
             // Converting TGA file to 32bpp
-            BufferedImage finalImage = ImageIO.read(saveToFile);
-            finalImage = convertTo32(finalImage);
-            ImageIO.write(finalImage,"TGA",saveToFile);
+            //BufferedImage finalImage = ImageIO.read(saveToFile);
+            //finalImage = convertTo32(finalImage);
+            //ImageIO.write(finalImage,"TGA",saveToFile);
         } catch (IOException e)
         {
             e.printStackTrace();
         }
     }
 
-    public static BufferedImage convertTo32(BufferedImage imageToConvert)
-    {
-        BufferedImage copy = new BufferedImage(imageToConvert.getWidth(), imageToConvert.getHeight(), BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D g = copy.createGraphics();
-        try {
-            g.setComposite(AlphaComposite.Src);
-            g.drawImage(imageToConvert, 0, 0, null);
-        }
-        finally {
-            g.dispose();
-        }
-        return copy;
-    }
+//    public static BufferedImage convertTo32(BufferedImage imageToConvert)
+//    {
+//        BufferedImage copy = new BufferedImage(imageToConvert.getWidth(), imageToConvert.getHeight(), BufferedImage.TYPE_INT_ARGB);
+//
+//        Graphics2D g = copy.createGraphics();
+//        try {
+//            g.setComposite(AlphaComposite.Src);
+//            g.drawImage(imageToConvert, 0, 0, null);
+//        }
+//        finally {
+//            g.dispose();
+//        }
+//        return copy;
+//    }
 //    Unused, may come to use later
 //    public void copyFiles() throws IOException
 //    {
