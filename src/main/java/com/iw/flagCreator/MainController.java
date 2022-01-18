@@ -1,10 +1,5 @@
 package com.iw.flagCreator;
 
-import org.apache.batik.transcoder.TranscoderException;
-import org.apache.batik.transcoder.image.JPEGTranscoder;
-import org.apache.batik.transcoder.image.PNGTranscoder;
-import org.apache.batik.transcoder.TranscoderInput;
-import org.apache.batik.transcoder.TranscoderOutput;
 import com.twelvemonkeys.image.ResampleOp;
 import flag_templates.GenericFlagTemplate;
 import flag_templates.hoi4FlagSpecs;
@@ -27,7 +22,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.io.*;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 public class MainController
@@ -84,7 +78,7 @@ public class MainController
     @FXML
     protected Label flagCreatorVersionLabel;
 
-    final String flagCreatorVersion = "1.1";
+    final String flagCreatorVersion = "1.2";
     File imageToConvert;
     GenericFlagTemplate newFlagSpecs = new GenericFlagTemplate(93,64);
 
@@ -141,60 +135,11 @@ public class MainController
         });
     }
 
-    public void downloadSVGImage() throws IOException, URISyntaxException
-    {
-        try (BufferedInputStream in = new BufferedInputStream(new URL(flagFilePathTextField.getText()).openStream());
-             FileOutputStream fileOutputStream = new FileOutputStream("DownloadedSVG.svg")) {
-            byte dataBuffer[] = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
-                fileOutputStream.write(dataBuffer, 0, bytesRead);
-            }
-        } catch (IOException e) {
-            // handle exception
-        }
-        File downloadedSVGFile = new File("DownloadedSVG.svg");
-        convertImageToSVG(downloadedSVGFile);
-        /// Deletes the downloaded SVG file
-        downloadedSVGFile.deleteOnExit();
-    }
-
-    //This works only in the IDE and refuses to work when Java file is created
-    public void convertImageToSVG(File svgFileToRead)
-    {
-        try {
-            BufferedImage image = ImageIO.read(svgFileToRead);
-            ImageIO.write(image, "PNG", imageToConvert = new File("flagFilePreview.png"));
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-//        try {
-//            String svgUriImputLocation = Paths.get("C:\\Users\\PlayerPC\\Desktop\\Flag_of_the_United_States.csv").toUri().toURL().toString();
-//            TranscoderInput transcoderInput = new TranscoderInput(svgUriImputLocation);
-//
-//            // Define OutputStream Location
-//            OutputStream outputStream = new FileOutputStream(imageToConvert = new File("flagFilePreview.png"));
-//            TranscoderOutput transcoderOutput = new TranscoderOutput(outputStream);
-//
-//            // Convert SVG to PNG and Save to File System
-//            PNGTranscoder pngTranscoder = new PNGTranscoder();
-//            pngTranscoder.transcode(transcoderInput, transcoderOutput);
-//
-//            // Clean Up
-//            outputStream.flush();
-//            outputStream.close();
-//
-//        } catch (Exception e) {
-//            System.out.println("");
-//        }
-    }
-
     /// Methods to open web pages from top menu bar, code duplication needs to be reduced
     @FXML
     public void openYouTubeInfoVideo(){
         try {
-            Desktop.getDesktop().browse(new URL("https://youtu.be/sHpO5SG_Tgg").toURI());
+            Desktop.getDesktop().browse(new URL("https://youtu.be/0a8xXvN_ygk").toURI());
         } catch (Exception e) {
             e.printStackTrace();
         }

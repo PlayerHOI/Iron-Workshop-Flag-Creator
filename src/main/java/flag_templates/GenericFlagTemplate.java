@@ -3,7 +3,6 @@ package flag_templates;
 import com.twelvemonkeys.image.ResampleOp;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.io.File;
