@@ -31,17 +31,16 @@ public class hoi4FlagSpecs extends GenericFlagTemplate
     public void createFlag()
     {
         try {
+            BufferedImage sourceFlag = ImageIO.read(getSourceFlagLocation());
+
             /// Creating Large Flag
-            BufferedImage largeFlag = ImageIO.read(getSourceFlagLocation());
-            largeFlag = resizeImage(largeFlag,super.getBaseFlagWidth(),super.getBaseFlagHeight());
+            BufferedImage largeFlag = resizeImage(sourceFlag,super.getBaseFlagWidth(),super.getBaseFlagHeight());
             convertToTGA(createFlipped(largeFlag),new File(super.getOutputFileFolderPath() + "\\" + super.getFlagName() + super.getFlagNameSuffix() + ".tga"));
             /// Creating Medium Flag
-            BufferedImage mediumFlag = ImageIO.read(getSourceFlagLocation());
-            mediumFlag = resizeImage(mediumFlag,mediumFlagWidth,mediumFlagHeight);
+            BufferedImage mediumFlag = resizeImage(sourceFlag,mediumFlagWidth,mediumFlagHeight);
             convertToTGA(createFlipped(mediumFlag),new File(super.getOutputFileFolderPath() + "\\medium\\" + super.getFlagName() + super.getFlagNameSuffix() + ".tga"));
             /// Creating Small Flag
-            BufferedImage smallFlag = ImageIO.read(getSourceFlagLocation());
-            smallFlag = resizeImage(mediumFlag,smallFlagWidth,smallFlagHeight);
+            BufferedImage smallFlag = resizeImage(sourceFlag,smallFlagWidth,smallFlagHeight);
             convertToTGA(createFlipped(smallFlag),new File(super.getOutputFileFolderPath() + "\\small\\" + super.getFlagName() + super.getFlagNameSuffix() + ".tga"));
 
         } catch (IOException e)
