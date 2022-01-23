@@ -138,7 +138,8 @@ public class GenericFlagTemplate
 //        }
 //        return copy;
 //    }
-//    Unused, may come to use later
+
+        //Unused, may come to use later
 //    public void copyFiles() throws IOException
 //    {
 //        InputStream is = null;
