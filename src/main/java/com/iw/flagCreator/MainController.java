@@ -76,6 +76,9 @@ public class MainController
     protected Button previewFlagButton;
 
     @FXML
+    protected CheckBox openOutputFolderCheckBox;
+
+    @FXML
     protected Label flagCreatorVersionLabel;
 
     final String flagCreatorVersion = "1.2";
@@ -288,6 +291,9 @@ public class MainController
         try
         {
             newFlagSpecs.createFlag();
+            if(openOutputFolderCheckBox.isSelected()){
+                Desktop.getDesktop().open(new File(outputFolderTextField.getText()));
+            }
         }
         catch (Exception e)
         {

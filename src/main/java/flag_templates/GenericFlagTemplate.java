@@ -3,6 +3,7 @@ package flag_templates;
 import com.twelvemonkeys.image.ResampleOp;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
 import java.io.File;
@@ -101,7 +102,6 @@ public class GenericFlagTemplate
         BufferedImage image = ImageIO.read(sourceFlagLocation);
         image = resizeImage(image,this.getBaseFlagWidth(),this.getBaseFlagHeight());
         convertToTGA(image,outputFolderLocation);
-		Desktop.getDesktop().open(new File(outputFileFolderPath));
     }
     public BufferedImage resizeImage(BufferedImage imageToResize, int width, int height)
     {
