@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iw.flagCreator.FlagNameChangerController">
+   <children>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="13.0" prefHeight="66.0" prefWidth="579.0">
+         <children>
+            <Text fx:id="topDescText" strokeType="OUTSIDE" strokeWidth="0.0" text="Description of tool..." />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="92.0" prefHeight="90.0" prefWidth="580.0" spacing="10.0" styleClass="appSectionFrame" stylesheets="@styles/style.css">
+         <children>
+            <GridPane prefHeight="106.0" prefWidth="579.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="176.5999755859375" minWidth="10.0" prefWidth="176.5999755859375" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="386.0" minWidth="0.0" prefWidth="256.6" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="386.0" minWidth="0.0" prefWidth="146.2" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location of files:" />
+                  <TextField fx:id="filelocationTextField" GridPane.columnIndex="1" />
+                  <ImageView fx:id="filesLocationFolderIcon" fitHeight="20.0" fitWidth="27.0" onMouseClicked="#openFilesLocationFolderLocator" GridPane.columnIndex="2">
+                     <image>
+                        <Image url="@folderIcon.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="10.0" radius="4.5" width="10.0" />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </ImageView>
+               </children>
+            </GridPane>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="192.0" prefHeight="100.0" prefWidth="580.0" spacing="10.0" styleClass="appSectionFrame" stylesheets="@styles/style.css">
+         <children>
+            <GridPane prefHeight="106.0" prefWidth="579.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="176.5999755859375" minWidth="10.0" prefWidth="176.5999755859375" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="386.0" minWidth="0.0" prefWidth="256.6" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="386.0" minWidth="0.0" prefWidth="146.2" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Old Text:" />
+                  <TextField fx:id="oldtextTextField" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="303.0" prefHeight="100.0" prefWidth="580.0" spacing="10.0" styleClass="appSectionFrame" stylesheets="@styles/style.css">
+         <children>
+            <GridPane prefHeight="106.0" prefWidth="579.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="176.5999755859375" minWidth="10.0" prefWidth="176.5999755859375" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="386.0" minWidth="0.0" prefWidth="256.6" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="386.0" minWidth="0.0" prefWidth="146.2" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="New Text:" />
+                  <TextField fx:id="newTextTextField" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+         </children>
+      </HBox>
+      <Button fx:id="commitChangesButton" disable="true" layoutX="119.0" layoutY="421.0" mnemonicParsing="false" onAction="#commitChangesClick" prefHeight="51.0" prefWidth="362.0" text="Commit Changes" />
+   </children>
+</AnchorPane>

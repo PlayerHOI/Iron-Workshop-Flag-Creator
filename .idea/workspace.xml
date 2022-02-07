@@ -12,7 +12,6 @@
     <list default="true" id="a0dcb7c8-b6cc-4584-bf04-cc368177fb3b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/iw/flagCreator/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iw/flagCreator/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/flag_templates/GenericFlagTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/flag_templates/GenericFlagTemplate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/iw/flagCreator/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/iw/flagCreator/main-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +22,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -64,7 +64,7 @@
       <recent name="C:\Users\PlayerPC\Desktop\IWFC\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.StartFlagCreator">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="jbr-11" />
       <option name="MAIN_CLASS_NAME" value="com.iw.flagCreator.Main" />
@@ -94,8 +94,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.StartFlagCreator" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -127,7 +127,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/iw/flagCreator/MainController.java</url>
-          <line>268</line>
+          <line>285</line>
           <properties class="com.iw.flagCreator.MainController" method="gameIconRemoveHoverEffectEU3">
             <option name="EMULATED" value="true" />
           </properties>

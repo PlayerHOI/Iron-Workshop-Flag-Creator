@@ -35,6 +35,11 @@
                  <MenuItem mnemonicParsing="false" onAction="#openGitHubPage" text="GitHub Page" />
               </items>
            </Menu>
+            <Menu mnemonicParsing="false" text="Tools">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#openFileNameChanger" text="Flag Name Changer" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
       <Label layoutX="37.0" layoutY="55.0" text="Step 1 : Select Files and Folders">

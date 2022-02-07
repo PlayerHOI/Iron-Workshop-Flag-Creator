@@ -5,7 +5,9 @@ import flag_templates.GenericFlagTemplate;
 import flag_templates.hoi4FlagSpecs;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -136,6 +139,20 @@ public class MainController
                 createFlagButton.setDisable(true);
             }
         });
+    }
+
+    public void openFileNameChanger(){
+        try {
+            Stage flagNameStage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("flag-name-changer.fxml"));
+            Scene flagNameChangerStage = new Scene(fxmlLoader.load(), 600, 500);
+            flagNameStage.setTitle("Flag Name Changer");
+            flagNameStage.setScene(flagNameChangerStage);
+            flagNameStage.setResizable(false);
+            flagNameStage.show();
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /// Methods to open web pages from top menu bar, code duplication needs to be reduced
